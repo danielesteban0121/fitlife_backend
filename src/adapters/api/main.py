@@ -5,7 +5,7 @@ def create_app() -> FastAPI:
     app = FastAPI(
         title="FitLife API",
         version="1.0.0",
-        description="Backend FitLife - Arquitectura Hexagonal"
+        description="Backend FitLife - Arquitectura Hexagonal",
     )
 
     register_routes(app)
