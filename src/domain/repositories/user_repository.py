@@ -4,7 +4,6 @@ from uuid import UUID
 from ..entities.user import User
 from ..value_objects.email import Email
 
-
 class UserRepository(ABC):
 
     @abstractmethod
@@ -17,4 +16,8 @@ class UserRepository(ABC):
 
     @abstractmethod
     async def find_by_email(self, email: Email) -> Optional[User]:
+        pass
+
+    @abstractmethod
+    async def exists_by_email(self, email: Email) -> bool:
         pass

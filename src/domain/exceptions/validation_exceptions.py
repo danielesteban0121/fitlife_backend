@@ -7,3 +7,7 @@ class InvalidEmailException(DomainException):
 
 class WeakPasswordException(DomainException):
     pass
+
+
+class InvalidBMIException(DomainException):
+    pass
