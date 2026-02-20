@@ -2,6 +2,7 @@ import re
 from dataclasses import dataclass
 from ..exceptions.validation_exceptions import InvalidEmailException
 
+
 @dataclass(frozen=True)
 class Email:
     value: str
@@ -12,11 +13,13 @@ class Email:
 
     @staticmethod
     def _is_valid(email: str) -> bool:
-        pattern = r'^[\w\.-]+@[\w\.-]+\.\w+$'
+        pattern = r"^[\w\.-]+@[\w\.-]+\.\w+$"
         return bool(re.match(pattern, email))
 
     def __str__(self) -> str:
         return self.value
+
+
 # ----Qué estamos logrando aquí
 
 # #Inmutabilidad (frozen=True)
