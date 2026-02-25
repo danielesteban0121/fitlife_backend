@@ -1,3 +1,5 @@
+from uuid import UUID
+
 from src.domain.entities.user import User
 from src.domain.value_objects.email import Email
 from src.infrastructure.database.models.user_model import UserModel
@@ -8,7 +10,7 @@ class UserMapper:
     @staticmethod
     def to_domain(model: UserModel) -> User:
         return User(
-            id=model.id,
+            id=UUID(model.id),  # 🔥 FIX IMPORTANTE
             email=Email(model.email),
             password_hash=model.password_hash,
             role=model.role,
