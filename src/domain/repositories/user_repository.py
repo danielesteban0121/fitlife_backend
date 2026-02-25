@@ -4,6 +4,7 @@ from uuid import UUID
 from ..entities.user import User
 from ..value_objects.email import Email
 
+
 class UserRepository(ABC):
 
     @abstractmethod

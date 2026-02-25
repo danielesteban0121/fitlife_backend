@@ -4,6 +4,7 @@ from datetime import datetime
 from ..value_objects.email import Email
 from ..enums.user_role import UserRole
 
+
 @dataclass
 class User:
     id: UUID
