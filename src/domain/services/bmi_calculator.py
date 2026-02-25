@@ -1,4 +1,5 @@
 from decimal import Decimal
+
 from ..exceptions.validation_exceptions import InvalidBMIException
 
 

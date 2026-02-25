@@ -1,5 +1,6 @@
+from datetime import UTC, datetime
 from uuid import uuid4
-from datetime import datetime, UTC
+
 from src.domain.entities.user import User
 from src.domain.value_objects.email import Email
 

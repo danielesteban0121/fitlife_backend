@@ -1,5 +1,6 @@
 import re
 from dataclasses import dataclass
+
 from ..exceptions.validation_exceptions import InvalidEmailException
 
 

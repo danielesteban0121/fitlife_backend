@@ -1,15 +1,12 @@
 import asyncio
-from uuid import uuid4
 from datetime import datetime, timezone
-
-from src.infrastructure.database.connection import AsyncSessionLocal
-from src.infrastructure.repositories.sqlalchemy_user_repository import (
-    SQLAlchemyUserRepository,
-)
+from uuid import uuid4
 
 from src.domain.entities.user import User
-from src.domain.value_objects.email import Email
 from src.domain.enums.user_role import UserRole
+from src.domain.value_objects.email import Email
+from src.infrastructure.database.connection import AsyncSessionLocal
+from src.infrastructure.repositories.sqlalchemy_user_repository import SQLAlchemyUserRepository
 
 
 async def test():

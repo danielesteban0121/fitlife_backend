@@ -1,8 +1,9 @@
 from dataclasses import dataclass
-from uuid import UUID
 from datetime import datetime
-from ..value_objects.email import Email
+from uuid import UUID
+
 from ..enums.user_role import UserRole
+from ..value_objects.email import Email
 
 
 @dataclass

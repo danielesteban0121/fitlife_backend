@@ -1,6 +1,7 @@
-from sqlalchemy import Column, String, Boolean, DateTime, Enum
-from src.infrastructure.database.base import Base
+from sqlalchemy import Boolean, Column, DateTime, Enum, String
+
 from src.domain.enums.user_role import UserRole
+from src.infrastructure.database.base import Base
 
 
 class UserModel(Base):

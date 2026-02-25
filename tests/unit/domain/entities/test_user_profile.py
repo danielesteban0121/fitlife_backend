@@ -1,5 +1,6 @@
-from uuid import uuid4
 from datetime import date
+from uuid import uuid4
+
 from src.domain.entities.user_profile import UserProfile
 
 

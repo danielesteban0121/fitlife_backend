@@ -1,6 +1,7 @@
 import pytest
-from src.domain.value_objects.email import Email
+
 from src.domain.exceptions.validation_exceptions import InvalidEmailException
+from src.domain.value_objects.email import Email
 
 
 def test_email_valid():

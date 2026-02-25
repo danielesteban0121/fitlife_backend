@@ -1,11 +1,11 @@
-from sqlalchemy import select
-from sqlalchemy.ext.asyncio import AsyncSession
 from uuid import UUID
 
-from src.domain.repositories.user_repository import UserRepository
-from src.domain.entities.user import User
-from src.domain.value_objects.email import Email
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
 
+from src.domain.entities.user import User
+from src.domain.repositories.user_repository import UserRepository
+from src.domain.value_objects.email import Email
 from src.infrastructure.database.models.user_model import UserModel
 from src.infrastructure.mappers.user_mapper import UserMapper
 
@@ -25,23 +25,17 @@ class SQLAlchemyUserRepository(UserRepository):
         return UserMapper.to_domain(model)
 
     async def find_by_id(self, user_id: UUID):
-        result = await self.session.execute(
-            select(UserModel).where(UserModel.id == str(user_id))
-        )
+        result = await self.session.execute(select(UserModel).where(UserModel.id == str(user_id)))
         model = result.scalar_one_or_none()
 
         return UserMapper.to_domain(model) if model else None
 
     async def find_by_email(self, email: Email):
-        result = await self.session.execute(
-            select(UserModel).where(UserModel.email == str(email))
-        )
+        result = await self.session.execute(select(UserModel).where(UserModel.email == str(email)))
         model = result.scalar_one_or_none()
 
         return UserMapper.to_domain(model) if model else None
 
     async def exists_by_email(self, email: Email) -> bool:
-        result = await self.session.execute(
-            select(UserModel).where(UserModel.email == str(email))
-        )
+        result = await self.session.execute(select(UserModel).where(UserModel.email == str(email)))
         return result.scalar_one_or_none() is not None

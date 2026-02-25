@@ -1,7 +1,9 @@
-import pytest
 from decimal import Decimal
-from src.domain.services.bmi_calculator import BMICalculator
+
+import pytest
+
 from src.domain.exceptions.validation_exceptions import InvalidBMIException
+from src.domain.services.bmi_calculator import BMICalculator
 
 
 def test_bmi_calculation():

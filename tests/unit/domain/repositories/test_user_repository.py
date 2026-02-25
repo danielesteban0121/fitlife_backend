@@ -1,4 +1,5 @@
 import pytest
+
 from src.domain.repositories.user_repository import UserRepository
 
 

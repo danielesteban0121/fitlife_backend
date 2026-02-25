@@ -1,4 +1,5 @@
-from sqlalchemy import Column, String, Float, Date, ForeignKey
+from sqlalchemy import Column, Date, Float, ForeignKey, String
+
 from src.infrastructure.database.base import Base
 
 

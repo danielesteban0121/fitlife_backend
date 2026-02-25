@@ -1,6 +1,7 @@
 import pytest
-from src.domain.value_objects.password import Password
+
 from src.domain.exceptions.validation_exceptions import WeakPasswordException
+from src.domain.value_objects.password import Password
 
 
 def test_missing_number():
