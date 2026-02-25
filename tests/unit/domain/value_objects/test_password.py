@@ -3,15 +3,16 @@ from src.domain.value_objects.password import Password
 from src.domain.exceptions.validation_exceptions import WeakPasswordException
 
 
-def test_valid_password():
-    Password("SecurePass123!")
-
-
-def test_short_password():
+def test_missing_number():
     with pytest.raises(WeakPasswordException):
-        Password("Short1!")
+        Password("SecurePass!")
 
 
-def test_missing_uppercase():
+def test_missing_special():
     with pytest.raises(WeakPasswordException):
-        Password("securepass123!")
+        Password("SecurePass123")
+
+
+def test_missing_lowercase():
+    with pytest.raises(WeakPasswordException):
+        Password("SECURE123!")

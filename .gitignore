@@ -1,2 +1,17 @@
-venv
-.env.example
+# Entorno virtual
+.venv/
+venv/
+
+# Archivos compilados
+__pycache__/
+*.pyc
+
+# Coverage
+.coverage
+htmlcov/
+
+# Variables de entorno
+.env
+
+# VSCode
+.vscode/
