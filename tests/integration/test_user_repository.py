@@ -4,7 +4,9 @@ from datetime import datetime, UTC
 from src.domain.entities.user import User
 from src.domain.value_objects.email import Email
 from src.domain.enums.user_role import UserRole
-from src.infrastructure.repositories.sqlalchemy_user_repository import SQLAlchemyUserRepository
+from src.infrastructure.repositories.sqlalchemy_user_repository import (
+    SQLAlchemyUserRepository,
+)
 
 
 @pytest.mark.asyncio
@@ -17,7 +19,7 @@ async def test_user_repository_save_and_find(session):
         password_hash="hash",
         role=UserRole.USER,
         is_active=True,
-        created_at=datetime.now(UTC)
+        created_at=datetime.now(UTC),
     )
 
     await repo.save(user)

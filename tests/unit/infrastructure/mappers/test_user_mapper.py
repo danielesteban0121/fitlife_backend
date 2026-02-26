@@ -5,6 +5,7 @@ from src.domain.entities.user import User
 from src.domain.value_objects.email import Email
 from src.domain.enums.user_role import UserRole
 
+
 def test_user_mapper_roundtrip():
     user = User(
         id=uuid4(),
@@ -12,7 +13,7 @@ def test_user_mapper_roundtrip():
         password_hash="hash",
         role=UserRole.USER,
         is_active=True,
-        created_at=datetime.now(UTC)
+        created_at=datetime.now(UTC),
     )
 
     model = UserMapper.to_model(user)

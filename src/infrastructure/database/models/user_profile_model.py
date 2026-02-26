@@ -2,6 +2,7 @@ from sqlalchemy import String, Float, Date
 from sqlalchemy.orm import Mapped, mapped_column
 from ..base import Base
 
+
 class UserProfileModel(Base):
     __tablename__ = "user_profiles"
 

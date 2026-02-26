@@ -35,12 +35,12 @@ pydantic==2.5.3
 pydantic-settings==2.1.0
 pydantic_core==2.14.6
 pyflakes==3.2.0
+PyJWT==2.11.0
 PyMySQL==1.1.2
 pytest==7.4.4
 pytest-asyncio==0.23.3
 pytest-cov==4.1.0
 python-dotenv==1.0.0
-python-jose==3.3.0
 python-multipart==0.0.6
 PyYAML==6.0.3
 rsa==4.9.1

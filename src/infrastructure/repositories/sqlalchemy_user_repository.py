@@ -7,6 +7,7 @@ from src.domain.value_objects.email import Email
 from src.infrastructure.database.models.user_model import UserModel
 from src.infrastructure.mappers.user_mapper import UserMapper
 
+
 class SQLAlchemyUserRepository(UserRepository):
 
     def __init__(self, session: AsyncSession):
