@@ -7,7 +7,7 @@ from datetime import datetime, UTC
 from ..base import Base
 from src.domain.enums.user_role import UserRole
 
-
+#s
 class UserModel(Base):
     __tablename__ = "users"
 
