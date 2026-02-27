@@ -1,4 +1,3 @@
-
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from uuid import UUID
@@ -23,20 +22,15 @@ class SQLAlchemyUserRepository(UserRepository):
         return UserMapper.to_domain(model)
 
     async def find_by_id(self, user_id: UUID):
-        result = await self.session.execute(
-            select(UserModel).where(UserModel.id == str(user_id))
-        )
+        result = await self.session.execute(select(UserModel).where(UserModel.id == str(user_id)))
         model = result.scalar_one_or_none()
         return UserMapper.to_domain(model) if model else None
 
     async def find_by_email(self, email: Email):
-        result = await self.session.execute(
-            select(UserModel).where(UserModel.email == str(email))
-        )
+        result = await self.session.execute(select(UserModel).where(UserModel.email == str(email)))
         model = result.scalar_one_or_none()
         return UserMapper.to_domain(model) if model else None
 
     async def exists_by_email(self, email: Email) -> bool:
         user = await self.find_by_email(email)
         return user is not None
-

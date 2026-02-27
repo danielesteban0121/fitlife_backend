@@ -11,7 +11,6 @@ class UserMapper:
     @staticmethod
     def to_domain(model: UserModel) -> User:
         return User(
-
             id=UUID(model.id),
             email=Email(model.email),
             password_hash=model.password_hash,

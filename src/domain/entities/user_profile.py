@@ -3,7 +3,6 @@ from datetime import date
 from uuid import UUID
 
 
-
 @dataclass
 class UserProfile:
     id: UUID
