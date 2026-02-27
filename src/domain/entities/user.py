@@ -6,6 +6,7 @@ from ..enums.user_role import UserRole
 from ..value_objects.email import Email
 
 
+
 @dataclass
 class User:
     id: UUID
