@@ -7,7 +7,7 @@ black==24.1.1
 
 certifi==2026.1.4
 cffi==2.0.0
->>>>>>> feature/fase-c-infra
+
 click==8.3.1
 colorama==0.4.6
 coverage==7.13.4
@@ -15,7 +15,7 @@ cryptography==42.0.0
 
 ecdsa==0.19.1
 fastapi==0.109.0
->>>>>>> feature/fase-c-infra
+
 flake8==7.0.0
 greenlet==3.3.2
 h11==0.16.0
@@ -28,14 +28,14 @@ iniconfig==2.3.0
 mccabe==0.7.0
 mypy==1.8.0
 mypy_extensions==1.1.0
->>>>>>> feature/fase-c-infra
+
 packaging==26.0
 passlib==1.7.4
 pathspec==1.0.4
 platformdirs==4.9.2
 pluggy==1.6.0
 
->>>>>>> feature/fase-c-infra
+
 pyasn1==0.6.2
 pycodestyle==2.11.1
 pycparser==3.0
@@ -45,7 +45,7 @@ pydantic-settings==2.1.0
 pydantic_core==2.14.6
 pyflakes==3.2.0
 PyJWT==2.11.0
->>>>>>> feature/fase-c-infra
+
 PyMySQL==1.1.2
 pytest==7.4.4
 pytest-asyncio==0.23.3
@@ -53,7 +53,7 @@ pytest-cov==4.1.0
 
 python-dotenv==1.0.0
 python-multipart==0.0.6
->>>>>>> feature/fase-c-infra
+
 PyYAML==6.0.3
 rsa==4.9.1
 six==1.17.0
@@ -63,6 +63,6 @@ starlette==0.35.1
 typing_extensions==4.15.0
 uvicorn==0.27.0
 
->>>>>>> feature/fase-c-infra
+
 watchfiles==1.1.1
 websockets==16.0
