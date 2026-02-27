@@ -1,4 +1,3 @@
-import pytest
 from src.infrastructure.security.bcrypt_password_hasher import BCryptPasswordHasher
 
 
