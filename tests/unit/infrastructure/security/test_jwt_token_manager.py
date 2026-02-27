@@ -7,9 +7,9 @@ def test_create_and_verify_token():
         access_token_expire_minutes=5,
     )
 
-    token = manager.create_access_token(
-        user_id="123",
-        role="USER",
+    token, expires_in = manager.create_access_token(
+    user_id="123",
+    role="USER",
     )
 
     payload = manager.verify_token(token)
