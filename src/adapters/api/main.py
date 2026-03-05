@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 
+from src.adapters.api.routes.assessment_routes import router
+
 
 def create_app() -> FastAPI:
     app = FastAPI(
@@ -18,16 +20,4 @@ def register_routes(app: FastAPI) -> None:
     async def health_check():
         return {"status": "ok"}
 
-
-from fastapi import FastAPI
-
-from src.adapters.api.routes.assessment_routes import router
-
-
-def create_app():
-
-    app = FastAPI()
-
     app.include_router(router)
-
-    return app
