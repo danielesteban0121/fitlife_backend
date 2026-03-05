@@ -14,6 +14,22 @@ from src.infrastructure.security.jwt_token_manager import (
 from src.application.use_cases.auth.register_user import RegisterUser
 from src.config.settings import settings
 
+from src.infrastructure.repositories.sqlalchemy_assessment_repository import (
+    SQLAlchemyAssessmentRepository,
+)
+from src.application.use_cases.assessments.submit_assessment_use_case import (
+    SubmitAssessmentUseCase,
+)
+
+
+def get_submit_assessment_use_case(
+    session: AsyncSession = Depends(get_db),
+) -> SubmitAssessmentUseCase:
+
+    repo = SQLAlchemyAssessmentRepository(session)
+
+    return SubmitAssessmentUseCase(repo)
+
 
 def get_register_user_use_case(
     session: AsyncSession = Depends(get_db),

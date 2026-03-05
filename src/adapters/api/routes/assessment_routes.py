@@ -1,5 +1,7 @@
-from fastapi import APIRouter
-from fastapi import Depends
+from fastapi import APIRouter, Depends
+
+from src.adapters.api.dependencies import get_submit_assessment_use_case
+from src.application.use_cases.assessments.submit_assessment_use_case import SubmitAssessmentUseCase
 
 from src.adapters.api.schemas.assessment_schemas import (
     SubmitAssessmentSchema,
@@ -23,16 +25,12 @@ router = APIRouter(prefix="/api/assessments", tags=["assessments"])
 @router.post("/submit")
 async def submit_assessment(
     payload: SubmitAssessmentSchema,
-    session=Depends(get_session),
+    use_case: SubmitAssessmentUseCase = Depends(get_submit_assessment_use_case),
 ):
-
-    repo = SQLAlchemyAssessmentRepository(session)
-
-    use_case = SubmitAssessmentUseCase(repo)
 
     dto = SubmitAssessmentDTO(
         user_id=payload.user_id,
-        answers=[AnswerDTO(**answer.model_dump()) for answer in payload.answers],
+        answers=[AnswerDTO(**a.model_dump()) for a in payload.answers],
     )
 
     result = await use_case.execute(dto)
