@@ -14,6 +14,7 @@ from src.infrastructure.database.connection import engine
 # DATABASE SETUP FOR TESTS
 # ==============================
 
+
 @pytest_asyncio.fixture(scope="session", autouse=True)
 async def prepare_database():
     """
@@ -34,6 +35,7 @@ async def prepare_database():
 # API CLIENT FIXTURE
 # ==============================
 
+
 @pytest_asyncio.fixture
 async def client():
     """
@@ -50,6 +52,7 @@ async def client():
 # ==============================
 # FAKE USER REPOSITORY
 # ==============================
+
 
 @pytest_asyncio.fixture
 async def user_repo():

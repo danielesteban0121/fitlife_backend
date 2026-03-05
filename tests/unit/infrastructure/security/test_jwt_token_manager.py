@@ -8,8 +8,8 @@ def test_create_and_verify_token():
     )
 
     token, expires_in = manager.create_access_token(
-    user_id="123",
-    role="USER",
+        user_id="123",
+        role="USER",
     )
 
     payload = manager.verify_token(token)
