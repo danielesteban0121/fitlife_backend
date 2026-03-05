@@ -48,9 +48,9 @@ class RegisterUser:
         saved_user = await self.user_repository.save(user)
 
         access_token, expires_in = self.jwt_manager.create_access_token(
-    user_id=str(user.id),
-    role=user.role,
-)
+            user_id=str(user.id),
+            role=user.role,
+        )
 
         return RegisterUserResponse(
             user_id=str(saved_user.id),

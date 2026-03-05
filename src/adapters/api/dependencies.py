@@ -22,8 +22,8 @@ def get_register_user_use_case(
     hasher = BCryptPasswordHasher()
 
     jwt_manager = JWTTokenManager(
-    secret_key=settings.jwt_secret_key,
-    algorithm=settings.jwt_algorithm,
-    access_token_expire_minutes=settings.jwt_expiration_minutes,
-)
+        secret_key=settings.jwt_secret_key,
+        algorithm=settings.jwt_algorithm,
+        access_token_expire_minutes=settings.jwt_expiration_minutes,
+    )
     return RegisterUser(repo, hasher, jwt_manager)

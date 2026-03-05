@@ -8,7 +8,6 @@ from sqlalchemy.ext.asyncio import (
 
 from src.infrastructure.database.base import Base
 
-
 DATABASE_URL = "sqlite+aiosqlite:///./fitlife.db"
 
 engine = create_async_engine(
@@ -23,9 +22,14 @@ AsyncSessionLocal = async_sessionmaker(
 )
 
 
-async def get_db() -> AsyncGenerator[AsyncSession, None]:
+# 🔹 Dependency principal
+async def get_session() -> AsyncGenerator[AsyncSession, None]:
     async with AsyncSessionLocal() as session:
         yield session
+
+
+# 🔹 Alias para compatibilidad con código existente
+get_db = get_session
 
 
 async def init_db() -> None:

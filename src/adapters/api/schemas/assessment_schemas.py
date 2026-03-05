@@ -1,0 +1,12 @@
+from pydantic import BaseModel
+from typing import List
+
+
+class AnswerSchema(BaseModel):
+    question_id: int
+    answer: int
+
+
+class SubmitAssessmentSchema(BaseModel):
+    user_id: int
+    answers: List[AnswerSchema]
