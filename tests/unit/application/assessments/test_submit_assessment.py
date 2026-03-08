@@ -1,9 +1,10 @@
-import pytest
-from unittest.mock import AsyncMock, Mock, patch
+from unittest.mock import AsyncMock, Mock
 
-from src.application.use_cases.assessments.submit_assessment import SubmitAssessment
+import pytest
+
 from src.application.dtos.assessment_dtos import SubmitAssessmentRequest
-from src.domain.entities.assessment import Assessment, FitnessGoal, ActivityLevel, ExperienceLevel
+from src.application.use_cases.assessments.submit_assessment import SubmitAssessment
+from src.domain.entities.assessment import ActivityLevel, Assessment, ExperienceLevel, FitnessGoal
 
 
 @pytest.mark.asyncio
@@ -18,7 +19,7 @@ async def test_submit_assessment_success():
     async def mock_save(assessment: Assessment):
         # Repositorio mutado o devuelto tal cual
         return assessment
-        
+
     mock_repo.save = AsyncMock(side_effect=mock_save)
 
     use_case = SubmitAssessment(
@@ -32,7 +33,7 @@ async def test_submit_assessment_success():
         experience_level=ExperienceLevel.INTERMEDIATE,
         height_cm=175.0,
         weight_kg=75.0,
-        age=28
+        age=28,
     )
 
     response = await use_case.execute(user_id="test-user-123", request=request)
@@ -40,7 +41,7 @@ async def test_submit_assessment_success():
     assert response.user_id == "test-user-123"
     assert response.fitness_score == 85.0
     assert response.goal == FitnessGoal.MUSCLE_GAIN
-    
+
     # Confirmar interacciones
     mock_calc.calculate_score.assert_called_once()
     mock_repo.save.assert_called_once()

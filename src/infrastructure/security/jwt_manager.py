@@ -14,9 +14,7 @@ class JWTTokenManager:
 
     def create_token(self, user_id: str):
 
-        expire = datetime.utcnow() + timedelta(
-            minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES
-        )
+        expire = datetime.utcnow() + timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
 
         payload = {
             "sub": user_id,

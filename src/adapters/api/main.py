@@ -2,7 +2,6 @@ from fastapi import FastAPI
 
 from src.adapters.api.routes.assessment_routes import router as assessment_router
 from src.adapters.api.routes.auth_routes import router as auth_router
-
 from src.infrastructure.database.base import Base
 from src.infrastructure.database.session import engine
 

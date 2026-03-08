@@ -1,11 +1,12 @@
-from sqlalchemy import String, Boolean, DateTime, Enum
+from datetime import UTC, datetime
+from uuid import uuid4
+
+from sqlalchemy import Boolean, DateTime, Enum, String
 from sqlalchemy.orm import Mapped, mapped_column
 
-from uuid import uuid4
-from datetime import datetime, UTC
+from src.domain.enums.user_role import UserRole
 
 from ..base import Base
-from src.domain.enums.user_role import UserRole
 
 
 class UserModel(Base):

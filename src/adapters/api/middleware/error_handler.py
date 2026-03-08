@@ -1,7 +1,6 @@
 from fastapi import Request
 from fastapi.responses import JSONResponse
 
-from src.domain.exceptions.base import DomainException
 from src.domain.exceptions.user_exceptions import (
     InvalidCredentials,
     UserNotFoundException,
@@ -10,7 +9,7 @@ from src.domain.exceptions.user_exceptions import (
 
 async def domain_exception_handler(
     request: Request,
-    exc: DomainException,
+    exc: Exception,
 ):
     status_code = 400
     if isinstance(exc, (InvalidCredentials, UserNotFoundException)):

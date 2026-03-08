@@ -1,5 +1,7 @@
-import pytest
 from unittest.mock import AsyncMock, Mock
+from uuid import UUID
+
+import pytest
 
 from src.application.use_cases.auth.login_user import LoginUser
 from src.domain.entities.user import User
@@ -15,7 +17,7 @@ async def test_login_user_success():
 
     # Usuario mokeado devuelto por el repositorio
     mock_user = User(
-        id="123",
+        id=UUID("00000000-0000-0000-0000-000000000123"),
         email=Email("test@example.com"),
         password_hash="hashed_password",
         role=UserRole.USER,

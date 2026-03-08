@@ -1,5 +1,6 @@
-import pytest
 from unittest.mock import Mock
+
+import pytest
 
 from src.application.use_cases.auth.refresh_token import RefreshToken
 
@@ -9,12 +10,8 @@ async def test_refresh_token_success():
     mock_jwt = Mock()
 
     # El token válido trae type: "refresh"
-    mock_jwt.verify_token.return_value = {
-        "sub": "user-123",
-        "role": "USER",
-        "type": "refresh"
-    }
-    
+    mock_jwt.verify_token.return_value = {"sub": "user-123", "role": "USER", "type": "refresh"}
+
     # Mokear generación de los nuevos tokens
     mock_jwt.create_access_token.return_value = ("new_access_token", 1800)
     mock_jwt.create_refresh_token.return_value = "new_refresh_token"
@@ -33,11 +30,7 @@ async def test_refresh_token_invalid_type_raises_error():
     mock_jwt = Mock()
 
     # Pasa un token de acceso al endpoint de refresh
-    mock_jwt.verify_token.return_value = {
-        "sub": "user-123",
-        "role": "USER",
-        "type": "access"
-    }
+    mock_jwt.verify_token.return_value = {"sub": "user-123", "role": "USER", "type": "access"}
 
     use_case = RefreshToken(token_manager=mock_jwt)
 

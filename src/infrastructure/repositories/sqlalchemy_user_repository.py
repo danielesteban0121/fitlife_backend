@@ -1,8 +1,10 @@
-from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select
 from uuid import UUID
-from src.domain.repositories.user_repository import UserRepository
+
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
+
 from src.domain.entities.user import User
+from src.domain.repositories.user_repository import UserRepository
 from src.domain.value_objects.email import Email
 from src.infrastructure.database.models.user_model import UserModel
 from src.infrastructure.mappers.user_mapper import UserMapper

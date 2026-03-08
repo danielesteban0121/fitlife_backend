@@ -1,47 +1,7 @@
-<<<<<<< HEAD
-from sqlalchemy.ext.asyncio import AsyncSession
-
-from src.domain.entities.assessment import Assessment
-from src.domain.repositories.assessment_repository import (
-    AssessmentRepository,
-)
-from src.infrastructure.database.models.assessment_model import (
-    AssessmentModel,
-)
-
-
-class SQLAlchemyAssessmentRepository(AssessmentRepository):
-
-    def __init__(self, session: AsyncSession):
-        self.session = session
-
-    async def save(self, assessment: Assessment):
-
-        answers = [
-            {
-                "question_id": a.question_id,
-                "answer": a.answer,
-            }
-            for a in assessment.answers
-        ]
-
-        model = AssessmentModel(
-            user_id=assessment.user_id,
-            fitness_score=assessment.fitness_score,
-            answers=answers,
-        )
-
-        self.session.add(model)
-
-        await self.session.commit()
-
-        await self.session.refresh(model)
-
-        return model
-=======
 from typing import Optional
+
+from sqlalchemy import delete, select
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select, delete
 
 from src.domain.entities.assessment import Assessment
 from src.domain.repositories.assessment_repository import AssessmentRepository
@@ -49,7 +9,7 @@ from src.infrastructure.database.models.assessment_model import AssessmentModel
 
 
 class SQLAlchemyAssessmentRepository(AssessmentRepository):
-    
+
     def __init__(self, session: AsyncSession):
         self.session = session
 
@@ -81,7 +41,7 @@ class SQLAlchemyAssessmentRepository(AssessmentRepository):
                 created_at=assessment.created_at,
             )
             self.session.add(model)
-            
+
         await self.session.commit()
         return assessment
 
@@ -89,10 +49,10 @@ class SQLAlchemyAssessmentRepository(AssessmentRepository):
         stmt = select(AssessmentModel).where(AssessmentModel.user_id == user_id)
         result = await self.session.execute(stmt)
         model = result.scalar_one_or_none()
-        
+
         if not model:
             return None
-            
+
         return Assessment(
             id=model.id,
             user_id=model.user_id,
@@ -110,4 +70,3 @@ class SQLAlchemyAssessmentRepository(AssessmentRepository):
         stmt = delete(AssessmentModel).where(AssessmentModel.user_id == user_id)
         await self.session.execute(stmt)
         await self.session.commit()
->>>>>>> a8a4ebf (feat(auth,assessment): implementar flujo completo de autenticación JWT y módulo de valoraciones físicas)

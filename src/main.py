@@ -1,9 +1,10 @@
-from fastapi import FastAPI
 from contextlib import asynccontextmanager
 
-from src.adapters.api.routes.auth_routes import router as auth_router
-from src.adapters.api.routes.assessment_routes import router as assessment_router
+from fastapi import FastAPI
+
 from src.adapters.api.middleware.error_handler import domain_exception_handler
+from src.adapters.api.routes.assessment_routes import router as assessment_router
+from src.adapters.api.routes.auth_routes import router as auth_router
 from src.domain.exceptions.base import DomainException
 
 

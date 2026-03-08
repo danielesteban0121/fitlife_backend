@@ -1,10 +1,9 @@
 from uuid import uuid4
 
-from src.domain.entities.assessment import Assessment, FitnessGoal, ActivityLevel, ExperienceLevel
+from src.application.dtos.assessment_dtos import AssessmentResponse, SubmitAssessmentRequest
+from src.domain.entities.assessment import ActivityLevel, Assessment, ExperienceLevel, FitnessGoal
 from src.domain.repositories.assessment_repository import AssessmentRepository
 from src.domain.services.assessment_calculator import AssessmentCalculator
-
-from src.application.dtos.assessment_dtos import SubmitAssessmentRequest, AssessmentResponse
 
 
 class SubmitAssessment:
@@ -17,7 +16,7 @@ class SubmitAssessment:
         self.calculator = calculator
 
     async def execute(self, user_id: str, request: SubmitAssessmentRequest) -> AssessmentResponse:
-        
+
         # 1. Crear la entidad de Assessment
         assessment = Assessment(
             id=str(uuid4()),
@@ -33,11 +32,12 @@ class SubmitAssessment:
         # 2. Calcular el score asignado por la calculadora de dominio
         assessment.fitness_score = self.calculator.calculate_score(assessment)
 
-        # 3. Guardar o actualizar en base de datos 
+        # 3. Guardar o actualizar en base de datos
         # (Si ya existe, se sobrescribirá gracias a la lógica del repositorio)
         saved_assessment = await self.repository.save(assessment)
 
         # 4. Devolver la respuesta en formato DTO
+        assert saved_assessment.created_at is not None
         return AssessmentResponse(
             id=saved_assessment.id,
             user_id=saved_assessment.user_id,
