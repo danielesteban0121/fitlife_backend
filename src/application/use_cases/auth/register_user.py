@@ -51,10 +51,19 @@ class RegisterUser:
             user_id=str(user.id),
             role=user.role,
         )
+<<<<<<< HEAD
+=======
+
+        refresh_token = self.jwt_manager.create_refresh_token(
+            user_id=str(user.id),
+            role=user.role,
+        )
+>>>>>>> a8a4ebf (feat(auth,assessment): implementar flujo completo de autenticación JWT y módulo de valoraciones físicas)
 
         return RegisterUserResponse(
             user_id=str(saved_user.id),
             email=str(saved_user.email),
             access_token=access_token,
+            refresh_token=refresh_token,
             expires_in=expires_in,
         )

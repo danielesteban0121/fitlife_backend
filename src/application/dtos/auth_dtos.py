@@ -10,4 +10,5 @@ class RegisterUserResponse(BaseModel):
     user_id: str
     email: EmailStr
     access_token: str
+    refresh_token: str
     expires_in: int

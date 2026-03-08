@@ -2,9 +2,10 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
-    jwt_secret_key: str = "supersecretkey_that_is_at_least_32_characters_long_123"
-    jwt_algorithm: str = "HS256"
-    jwt_expiration_minutes: int = 60
+
+    SECRET_KEY: str = "super-secret-key-that-is-at-least-32-bytes"
+    ALGORITHM: str = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
 
 
 settings = Settings()

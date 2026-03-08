@@ -1,22 +1,52 @@
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends
+from src.application.dtos.auth_dtos import RegisterUserRequest
 
-from src.application.dtos.auth_dtos import (
-    RegisterUserRequest,
-    RegisterUserResponse,
+from src.adapters.api.schemas.auth_schemas import (
+    RegisterRequest,
+    LoginRequest,
+    RefreshRequest,
+    TokenResponse,
 )
-from src.application.use_cases.auth.register_user import RegisterUser
-from src.adapters.api.dependencies import get_register_user_use_case
+
+from src.adapters.api.dependencies import (
+    get_register_user,
+    get_login_user,
+    get_refresh_token,
+)
 
 router = APIRouter(prefix="/api/auth", tags=["Auth"])
 
 
-@router.post(
-    "/register",
-    response_model=RegisterUserResponse,
-    status_code=status.HTTP_201_CREATED,
-)
+@router.post("/register", response_model=TokenResponse)
 async def register(
-    request: RegisterUserRequest,
-    use_case: RegisterUser = Depends(get_register_user_use_case),
+    data: RegisterRequest,
+    use_case=Depends(get_register_user),
 ):
-    return await use_case.execute(request)
+
+    dto = RegisterUserRequest(
+        email=data.email,
+        password=data.password,
+    )
+
+    return await use_case.execute(dto)
+
+
+@router.post("/login", response_model=TokenResponse)
+async def login(
+    data: LoginRequest,
+    use_case=Depends(get_login_user),
+):
+
+    return await use_case.execute(
+        email=data.email,
+        password=data.password,
+    )
+
+
+@router.post("/refresh", response_model=TokenResponse)
+async def refresh(
+    data: RefreshRequest,
+    use_case=Depends(get_refresh_token),
+):
+
+    return await use_case.execute(data.token)

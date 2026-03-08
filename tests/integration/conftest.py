@@ -2,6 +2,7 @@ import pytest_asyncio
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker
 from src.infrastructure.database.base import Base
+from src.infrastructure.database.models import UserModel, AssessmentModel
 
 
 @pytest_asyncio.fixture

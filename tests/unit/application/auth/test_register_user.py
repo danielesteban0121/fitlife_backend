@@ -17,6 +17,7 @@ async def test_register_user_success():
     mock_repo.find_by_email.return_value = None
     mock_hasher.hash.return_value = "hashed_password"
     mock_jwt.create_access_token.return_value = ("token", 1800)
+    mock_jwt.create_refresh_token.return_value = "refresh_token"
 
     use_case = RegisterUser(
         user_repository=mock_repo,
@@ -42,4 +43,5 @@ async def test_register_user_success():
 
     assert response.email == "test@example.com"
     assert response.access_token == "token"
+    assert response.refresh_token == "refresh_token"
     assert response.expires_in == 1800

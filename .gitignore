@@ -15,3 +15,7 @@ htmlcov/
 
 # VSCode
 .vscode/
+
+# Base de datos
+*.db
+*.sqlite3
