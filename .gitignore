@@ -18,4 +18,6 @@ htmlcov/
 
 # Base de datos
 *.db
+*.sqlite
 *.sqlite3
+fitlife.db
