@@ -1,4 +1,3 @@
-import pytest
 from src.domain.entities.assessment import Assessment, FitnessGoal, ActivityLevel, ExperienceLevel
 from src.domain.services.assessment_calculator import AssessmentCalculator
 

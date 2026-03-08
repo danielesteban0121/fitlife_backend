@@ -2,6 +2,7 @@ aiomysql==0.2.0
 aiosqlite==0.22.1
 annotated-types==0.7.0
 anyio==4.12.1
+autoflake==2.3.3
 bcrypt==5.0.0
 black==24.1.1
 certifi==2026.1.4
@@ -49,9 +50,8 @@ PyMySQL==1.1.2
 pytest==7.4.4
 pytest-asyncio==0.23.3
 pytest-cov==4.1.0
-python-discovery==1.0.0
+python-discovery==1.1.0
 python-dotenv==1.0.0
-python-jose==3.3.0
 python-multipart==0.0.6
 PyYAML==6.0.3
 rsa==4.9.1
@@ -62,9 +62,8 @@ starlette==0.35.1
 types-passlib==1.7.7.20260211
 types-pyasn1==0.6.0.20250914
 types-python-jose==3.5.0.20250531
-types-ujson==5.10.0.20250822
 typing_extensions==4.15.0
 uvicorn==0.27.0
-virtualenv==21.0.0
+virtualenv==21.1.0
 watchfiles==1.1.1
 websockets==16.0

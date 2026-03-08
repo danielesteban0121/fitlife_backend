@@ -61,6 +61,8 @@ black src tests --check
 
 # Aplicar formateo
 black src tests
+
+flake8 src tests
 ```
 
 ### Isort (ordenar imports)

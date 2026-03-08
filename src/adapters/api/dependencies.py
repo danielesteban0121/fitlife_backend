@@ -22,6 +22,11 @@ from src.config.settings import settings
 from src.application.use_cases.auth.register_user import RegisterUser
 from src.application.use_cases.auth.login_user import LoginUser
 from src.application.use_cases.auth.refresh_token import RefreshToken
+from src.infrastructure.repositories.sqlalchemy_assessment_repository import (
+    SQLAlchemyAssessmentRepository,
+)
+from src.domain.services.assessment_calculator import AssessmentCalculator
+from src.application.use_cases.assessments.submit_assessment import SubmitAssessment
 
 
 def get_register_user(
@@ -98,13 +103,6 @@ def get_current_user(token: str = Depends(oauth2_scheme)) -> dict:
             detail="Could not validate credentials",
             headers={"WWW-Authenticate": "Bearer"},
         )
-
-
-from src.infrastructure.repositories.sqlalchemy_assessment_repository import (
-    SQLAlchemyAssessmentRepository,
-)
-from src.domain.services.assessment_calculator import AssessmentCalculator
-from src.application.use_cases.assessments.submit_assessment import SubmitAssessment
 
 
 def get_submit_assessment(

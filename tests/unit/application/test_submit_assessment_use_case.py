@@ -1,9 +1,7 @@
 import pytest
-from unittest.mock import AsyncMock
-
 from src.application.dtos.assessment_dtos import SubmitAssessmentRequest
 from src.application.use_cases.assessments.submit_assessment import SubmitAssessment
-from src.domain.entities.assessment import Assessment, FitnessGoal, ActivityLevel, ExperienceLevel
+from src.domain.entities.assessment import Assessment, FitnessGoal
 from src.domain.services.assessment_calculator import AssessmentCalculator
 
 

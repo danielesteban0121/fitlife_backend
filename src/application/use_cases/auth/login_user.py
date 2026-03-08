@@ -1,9 +1,3 @@
-from src.domain.repositories.user_repository import UserRepository
-from src.domain.services.password_hasher import PasswordHasher
-from src.infrastructure.security.jwt_token_manager import JWTTokenManager
-from src.domain.exceptions.user_exceptions import InvalidCredentials
-
-
 class LoginUser:
 
     def __init__(self, user_repository, password_hasher, jwt_manager):

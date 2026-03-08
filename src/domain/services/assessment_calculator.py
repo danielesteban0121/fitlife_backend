@@ -1,4 +1,4 @@
-from src.domain.entities.assessment import Assessment, ActivityLevel, ExperienceLevel, FitnessGoal
+from src.domain.entities.assessment import Assessment, ActivityLevel, ExperienceLevel
 
 
 class AssessmentCalculator:

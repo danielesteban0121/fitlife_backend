@@ -1,5 +1,5 @@
 import pytest
-from unittest.mock import AsyncMock, Mock, patch
+from unittest.mock import AsyncMock, Mock
 
 from src.application.use_cases.assessments.submit_assessment import SubmitAssessment
 from src.application.dtos.assessment_dtos import SubmitAssessmentRequest
