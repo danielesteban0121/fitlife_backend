@@ -1,5 +1,6 @@
-from sqlalchemy import String, Float, Date
+from sqlalchemy import Date, Float, String
 from sqlalchemy.orm import Mapped, mapped_column
+
 from ..base import Base
 
 

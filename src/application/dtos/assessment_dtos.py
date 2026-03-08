@@ -1,8 +1,9 @@
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Optional
 from datetime import datetime
+from typing import Optional
 
-from src.domain.entities.assessment import FitnessGoal, ActivityLevel, ExperienceLevel
+from pydantic import BaseModel, ConfigDict, Field
+
+from src.domain.entities.assessment import ActivityLevel, ExperienceLevel, FitnessGoal
 
 
 class SubmitAssessmentRequest(BaseModel):

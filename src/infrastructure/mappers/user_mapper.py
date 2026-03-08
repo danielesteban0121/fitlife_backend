@@ -1,8 +1,8 @@
 from uuid import UUID
 
 from src.domain.entities.user import User
-from src.domain.value_objects.email import Email
 from src.domain.enums.user_role import UserRole
+from src.domain.value_objects.email import Email
 from src.infrastructure.database.models.user_model import UserModel
 
 

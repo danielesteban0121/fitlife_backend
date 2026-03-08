@@ -1,18 +1,17 @@
 from fastapi import APIRouter, Depends
-from src.application.dtos.auth_dtos import RegisterUserRequest
-
-from src.adapters.api.schemas.auth_schemas import (
-    RegisterRequest,
-    LoginRequest,
-    RefreshRequest,
-    TokenResponse,
-)
 
 from src.adapters.api.dependencies import (
-    get_register_user,
     get_login_user,
     get_refresh_token,
+    get_register_user,
 )
+from src.adapters.api.schemas.auth_schemas import (
+    LoginRequest,
+    RefreshRequest,
+    RegisterRequest,
+    TokenResponse,
+)
+from src.application.dtos.auth_dtos import RegisterUserRequest
 
 router = APIRouter(prefix="/api/auth", tags=["Auth"])
 

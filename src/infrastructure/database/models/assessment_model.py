@@ -1,11 +1,14 @@
-from sqlalchemy import String, Float, Integer, DateTime, Enum as SAEnum, ForeignKey
+from datetime import UTC, datetime
+from typing import Optional
+from uuid import uuid4
+
+from sqlalchemy import DateTime
+from sqlalchemy import Enum as SAEnum
+from sqlalchemy import Float, ForeignKey, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column
 
-from uuid import uuid4
-from datetime import datetime, UTC
-
+from src.domain.entities.assessment import ActivityLevel, ExperienceLevel, FitnessGoal
 from src.infrastructure.database.base import Base
-from src.domain.entities.assessment import FitnessGoal, ActivityLevel, ExperienceLevel
 
 
 class AssessmentModel(Base):
@@ -34,7 +37,7 @@ class AssessmentModel(Base):
     weight_kg: Mapped[float] = mapped_column(Float, nullable=False)
     age: Mapped[int] = mapped_column(Integer, nullable=False)
 
-    fitness_score: Mapped[float] = mapped_column(Float, nullable=True)
+    fitness_score: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
 
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),

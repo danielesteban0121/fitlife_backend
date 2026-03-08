@@ -1,8 +1,10 @@
-import pytest
 from unittest.mock import AsyncMock, Mock
+from uuid import UUID
 
-from src.application.use_cases.auth.register_user import RegisterUser
+import pytest
+
 from src.application.dtos.auth_dtos import RegisterUserRequest
+from src.application.use_cases.auth.register_user import RegisterUser
 from src.domain.entities.user import User
 from src.domain.enums.user_role import UserRole
 from src.domain.value_objects.email import Email
@@ -31,7 +33,7 @@ async def test_register_user_success():
     )
 
     mock_repo.save.return_value = User(
-        id="123",
+        id=UUID("00000000-0000-0000-0000-000000000123"),
         email=Email("test@example.com"),
         password_hash="hashed_password",
         role=UserRole.USER,

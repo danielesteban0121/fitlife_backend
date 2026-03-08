@@ -60,9 +60,18 @@ pytest tests/integration/test_auth_flow.py -v
 black src tests --check
 
 # Aplicar formateo
+autoflake --remove-all-unused-imports --recursive --in-place src tests
+isort src tests
 black src tests
-
 flake8 src tests
+
+| Tool      | Función                   |
+| --------- | ------------------------- |
+| autoflake | elimina imports no usados |
+| isort     | ordena imports            |
+| black     | formatea código           |
+| flake8    | valida calidad            |
+
 ```
 
 ### Isort (ordenar imports)

@@ -1,9 +1,10 @@
-from fastapi import APIRouter, Depends
-from typing import Dict, Any
+from typing import Any, Dict
 
-from src.application.dtos.assessment_dtos import SubmitAssessmentRequest, AssessmentResponse
+from fastapi import APIRouter, Depends
+
+from src.adapters.api.dependencies import get_current_user, get_submit_assessment
+from src.application.dtos.assessment_dtos import AssessmentResponse, SubmitAssessmentRequest
 from src.application.use_cases.assessments.submit_assessment import SubmitAssessment
-from src.adapters.api.dependencies import get_submit_assessment, get_current_user
 
 router = APIRouter(prefix="/api/assessments", tags=["Assessments"])
 

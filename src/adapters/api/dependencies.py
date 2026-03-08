@@ -1,32 +1,27 @@
+import jwt
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.ext.asyncio import AsyncSession
-import jwt
 
-from src.infrastructure.database.connection import get_db
-from src.infrastructure.repositories.sqlalchemy_user_repository import (
-    SQLAlchemyUserRepository,
-)
-
-from src.infrastructure.security.bcrypt_password_hasher import (
-    BCryptPasswordHasher,
-)
-
-from src.infrastructure.security.jwt_token_manager import (
-    JWTTokenManager,
-)
-
-from src.config.settings import settings
-
-
-from src.application.use_cases.auth.register_user import RegisterUser
+from src.application.use_cases.assessments.submit_assessment import SubmitAssessment
 from src.application.use_cases.auth.login_user import LoginUser
 from src.application.use_cases.auth.refresh_token import RefreshToken
+from src.application.use_cases.auth.register_user import RegisterUser
+from src.config.settings import settings
+from src.domain.services.assessment_calculator import AssessmentCalculator
+from src.infrastructure.database.connection import get_db
 from src.infrastructure.repositories.sqlalchemy_assessment_repository import (
     SQLAlchemyAssessmentRepository,
 )
-from src.domain.services.assessment_calculator import AssessmentCalculator
-from src.application.use_cases.assessments.submit_assessment import SubmitAssessment
+from src.infrastructure.repositories.sqlalchemy_user_repository import (
+    SQLAlchemyUserRepository,
+)
+from src.infrastructure.security.bcrypt_password_hasher import (
+    BCryptPasswordHasher,
+)
+from src.infrastructure.security.jwt_token_manager import (
+    JWTTokenManager,
+)
 
 
 def get_register_user(

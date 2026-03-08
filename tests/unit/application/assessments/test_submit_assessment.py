@@ -1,9 +1,10 @@
-import pytest
 from unittest.mock import AsyncMock, Mock
 
-from src.application.use_cases.assessments.submit_assessment import SubmitAssessment
+import pytest
+
 from src.application.dtos.assessment_dtos import SubmitAssessmentRequest
-from src.domain.entities.assessment import Assessment, FitnessGoal, ActivityLevel, ExperienceLevel
+from src.application.use_cases.assessments.submit_assessment import SubmitAssessment
+from src.domain.entities.assessment import ActivityLevel, Assessment, ExperienceLevel, FitnessGoal
 
 
 @pytest.mark.asyncio

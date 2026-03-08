@@ -1,16 +1,15 @@
+from datetime import UTC, datetime
 from uuid import uuid4
-from datetime import datetime, UTC
-
-from src.domain.entities.user import User
-from src.domain.enums.user_role import UserRole
-from src.domain.value_objects.email import Email
-from src.domain.repositories.user_repository import UserRepository
-from src.domain.exceptions.user_exceptions import EmailAlreadyExistsException
 
 from src.application.dtos.auth_dtos import (
     RegisterUserRequest,
     RegisterUserResponse,
 )
+from src.domain.entities.user import User
+from src.domain.enums.user_role import UserRole
+from src.domain.exceptions.user_exceptions import EmailAlreadyExistsException
+from src.domain.repositories.user_repository import UserRepository
+from src.domain.value_objects.email import Email
 
 
 class RegisterUser:
@@ -37,7 +36,7 @@ class RegisterUser:
         password_hash = self.password_hasher.hash(request.password)
 
         user = User(
-            id=str(uuid4()),
+            id=uuid4(),
             email=email,
             password_hash=password_hash,
             role=UserRole.USER,

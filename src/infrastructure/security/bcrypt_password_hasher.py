@@ -1,4 +1,5 @@
 import bcrypt
+
 from src.domain.services.password_hasher import PasswordHasher
 
 

@@ -1,14 +1,11 @@
 import pytest_asyncio
 from httpx import AsyncClient
 
-from src.main import app
-
 from src.domain.entities.user import User
 from src.domain.value_objects.email import Email
-
 from src.infrastructure.database.base import Base
 from src.infrastructure.database.connection import engine
-
+from src.main import app
 
 # ==============================
 # DATABASE SETUP FOR TESTS

@@ -1,6 +1,8 @@
+import uuid
+
 import pytest
 from httpx import AsyncClient
-import uuid
+
 from src.main import app
 
 

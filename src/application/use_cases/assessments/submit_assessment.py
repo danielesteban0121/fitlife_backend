@@ -1,10 +1,9 @@
 from uuid import uuid4
 
-from src.domain.entities.assessment import Assessment, FitnessGoal, ActivityLevel, ExperienceLevel
+from src.application.dtos.assessment_dtos import AssessmentResponse, SubmitAssessmentRequest
+from src.domain.entities.assessment import ActivityLevel, Assessment, ExperienceLevel, FitnessGoal
 from src.domain.repositories.assessment_repository import AssessmentRepository
 from src.domain.services.assessment_calculator import AssessmentCalculator
-
-from src.application.dtos.assessment_dtos import SubmitAssessmentRequest, AssessmentResponse
 
 
 class SubmitAssessment:
@@ -38,6 +37,7 @@ class SubmitAssessment:
         saved_assessment = await self.repository.save(assessment)
 
         # 4. Devolver la respuesta en formato DTO
+        assert saved_assessment.created_at is not None
         return AssessmentResponse(
             id=saved_assessment.id,
             user_id=saved_assessment.user_id,

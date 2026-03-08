@@ -1,5 +1,6 @@
-import pytest
 from unittest.mock import Mock
+
+import pytest
 
 from src.application.use_cases.auth.refresh_token import RefreshToken
 

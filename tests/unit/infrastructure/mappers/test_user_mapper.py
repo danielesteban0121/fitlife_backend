@@ -1,9 +1,10 @@
+from datetime import UTC, datetime
 from uuid import uuid4
-from datetime import datetime, UTC
-from src.infrastructure.mappers.user_mapper import UserMapper
+
 from src.domain.entities.user import User
-from src.domain.value_objects.email import Email
 from src.domain.enums.user_role import UserRole
+from src.domain.value_objects.email import Email
+from src.infrastructure.mappers.user_mapper import UserMapper
 
 
 def test_user_mapper_roundtrip():

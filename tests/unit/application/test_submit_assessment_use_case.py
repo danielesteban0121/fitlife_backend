@@ -1,4 +1,5 @@
 import pytest
+
 from src.application.dtos.assessment_dtos import SubmitAssessmentRequest
 from src.application.use_cases.assessments.submit_assessment import SubmitAssessment
 from src.domain.entities.assessment import Assessment, FitnessGoal

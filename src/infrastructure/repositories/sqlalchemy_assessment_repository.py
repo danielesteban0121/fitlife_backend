@@ -1,6 +1,7 @@
 from typing import Optional
+
+from sqlalchemy import delete, select
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select, delete
 
 from src.domain.entities.assessment import Assessment
 from src.domain.repositories.assessment_repository import AssessmentRepository
