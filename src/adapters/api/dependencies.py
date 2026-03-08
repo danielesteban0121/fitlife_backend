@@ -18,28 +18,10 @@ from src.infrastructure.security.jwt_token_manager import (
 
 from src.config.settings import settings
 
-<<<<<<< HEAD
-from src.infrastructure.repositories.sqlalchemy_assessment_repository import (
-    SQLAlchemyAssessmentRepository,
-)
-from src.application.use_cases.assessments.submit_assessment_use_case import (
-    SubmitAssessmentUseCase,
-)
 
-
-def get_submit_assessment_use_case(
-    session: AsyncSession = Depends(get_db),
-) -> SubmitAssessmentUseCase:
-
-    repo = SQLAlchemyAssessmentRepository(session)
-
-    return SubmitAssessmentUseCase(repo)
-
-=======
 from src.application.use_cases.auth.register_user import RegisterUser
 from src.application.use_cases.auth.login_user import LoginUser
 from src.application.use_cases.auth.refresh_token import RefreshToken
->>>>>>> a8a4ebf (feat(auth,assessment): implementar flujo completo de autenticación JWT y módulo de valoraciones físicas)
 
 
 def get_register_user(
@@ -49,14 +31,6 @@ def get_register_user(
     repo = SQLAlchemyUserRepository(db)
     hasher = BCryptPasswordHasher()
 
-<<<<<<< HEAD
-    jwt_manager = JWTTokenManager(
-        secret_key=settings.jwt_secret_key,
-        algorithm=settings.jwt_algorithm,
-        access_token_expire_minutes=settings.jwt_expiration_minutes,
-    )
-    return RegisterUser(repo, hasher, jwt_manager)
-=======
     token_manager = JWTTokenManager(
         settings.SECRET_KEY,
         settings.ALGORITHM,
@@ -89,7 +63,9 @@ def get_refresh_token() -> RefreshToken:
 
     return RefreshToken(token_manager)
 
+
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/auth/login")
+
 
 def get_current_user(token: str = Depends(oauth2_scheme)) -> dict:
     try:
@@ -98,14 +74,14 @@ def get_current_user(token: str = Depends(oauth2_scheme)) -> dict:
             settings.ALGORITHM,
         )
         payload = token_manager.verify_token(token)
-        
+
         if payload.get("type") != "access":
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail="Invalid token type",
                 headers={"WWW-Authenticate": "Bearer"},
             )
-            
+
         return {
             "user_id": payload.get("sub"),
             "role": payload.get("role"),
@@ -123,9 +99,13 @@ def get_current_user(token: str = Depends(oauth2_scheme)) -> dict:
             headers={"WWW-Authenticate": "Bearer"},
         )
 
-from src.infrastructure.repositories.sqlalchemy_assessment_repository import SQLAlchemyAssessmentRepository
+
+from src.infrastructure.repositories.sqlalchemy_assessment_repository import (
+    SQLAlchemyAssessmentRepository,
+)
 from src.domain.services.assessment_calculator import AssessmentCalculator
 from src.application.use_cases.assessments.submit_assessment import SubmitAssessment
+
 
 def get_submit_assessment(
     db: AsyncSession = Depends(get_db),
@@ -133,4 +113,3 @@ def get_submit_assessment(
     repo = SQLAlchemyAssessmentRepository(db)
     calc = AssessmentCalculator()
     return SubmitAssessment(repo, calc)
->>>>>>> a8a4ebf (feat(auth,assessment): implementar flujo completo de autenticación JWT y módulo de valoraciones físicas)

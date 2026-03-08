@@ -9,6 +9,8 @@ class RegisterRequest(BaseModel):
 class LoginRequest(BaseModel):
     email: EmailStr
     password: str
+
+
 class RefreshRequest(BaseModel):
     token: str
 

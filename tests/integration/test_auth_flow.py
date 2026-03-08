@@ -57,9 +57,7 @@ async def test_register_login_refresh_flow():
 
         refresh_response = await client.post(
             "/api/auth/refresh",
-            json={
-                "token": refresh_token
-            },
+            json={"token": refresh_token},
         )
 
         assert refresh_response.status_code == 200

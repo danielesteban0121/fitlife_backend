@@ -7,6 +7,7 @@ class UserNotFoundException(DomainException):
 
 class EmailAlreadyExistsException(DomainException):
     pass
-    
+
+
 class InvalidCredentials(DomainException):
     pass

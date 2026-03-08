@@ -1,17 +1,7 @@
-<<<<<<< HEAD
 from dataclasses import dataclass
-from typing import List
-
-
-@dataclass
-class AssessmentAnswer:
-    question_id: int
-    answer: int
-=======
-from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, UTC
 from enum import Enum
-from typing import List, Optional
+from typing import Optional
 
 
 class FitnessGoal(str, Enum):
@@ -34,16 +24,10 @@ class ExperienceLevel(str, Enum):
     BEGINNER = "beginner"
     INTERMEDIATE = "intermediate"
     ADVANCED = "advanced"
->>>>>>> a8a4ebf (feat(auth,assessment): implementar flujo completo de autenticación JWT y módulo de valoraciones físicas)
 
 
 @dataclass
 class Assessment:
-<<<<<<< HEAD
-    user_id: int
-    answers: List[AssessmentAnswer]
-    fitness_score: float
-=======
     id: str
     user_id: str
     goal: FitnessGoal
@@ -57,5 +41,4 @@ class Assessment:
 
     def __post_init__(self):
         if self.created_at is None:
-            self.created_at = datetime.utcnow()
->>>>>>> a8a4ebf (feat(auth,assessment): implementar flujo completo de autenticación JWT y módulo de valoraciones físicas)
+            self.created_at = datetime.now(UTC)

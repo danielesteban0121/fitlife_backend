@@ -17,7 +17,7 @@ class SubmitAssessment:
         self.calculator = calculator
 
     async def execute(self, user_id: str, request: SubmitAssessmentRequest) -> AssessmentResponse:
-        
+
         # 1. Crear la entidad de Assessment
         assessment = Assessment(
             id=str(uuid4()),
@@ -33,7 +33,7 @@ class SubmitAssessment:
         # 2. Calcular el score asignado por la calculadora de dominio
         assessment.fitness_score = self.calculator.calculate_score(assessment)
 
-        # 3. Guardar o actualizar en base de datos 
+        # 3. Guardar o actualizar en base de datos
         # (Si ya existe, se sobrescribirá gracias a la lógica del repositorio)
         saved_assessment = await self.repository.save(assessment)
 
