@@ -9,4 +9,3 @@ httpx==0.26.0
 pre-commit
 isort
 types-passlib
-types-python-jose

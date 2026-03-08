@@ -15,3 +15,9 @@ htmlcov/
 
 # VSCode
 .vscode/
+
+# Base de datos
+*.db
+*.sqlite
+*.sqlite3
+fitlife.db

@@ -6,7 +6,7 @@ from src.infrastructure.database.connection import engine
 # IMPORTANTE: importar modelos para que SQLAlchemy los registre
 from src.infrastructure.database.models.user_model import UserModel  # noqa: F401
 from src.infrastructure.database.models.user_profile_model import UserProfileModel  # noqa: F401
-
+from src.infrastructure.database.models.assessment_model import AssessmentModel  # noqa: F401
 
 async def init_db():
     async with engine.begin() as conn:
