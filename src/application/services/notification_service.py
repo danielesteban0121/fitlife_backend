@@ -1,8 +1,7 @@
 import uuid
-from typing import Dict
+from typing import Dict, Optional
 from datetime import datetime
 from uuid import UUID
-from typing import Dict, Optional
 
 from src.domain.entities.message import Message, MessageType
 from src.domain.repositories.message_repository import MessageRepository
