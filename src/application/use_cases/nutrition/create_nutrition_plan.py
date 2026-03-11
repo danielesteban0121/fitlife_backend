@@ -1,9 +1,6 @@
 from uuid import UUID, uuid4
 
-from src.application.dtos.nutrition_dtos import (
-    CreateNutritionPlanRequest,
-    NutritionPlanResponse,
-)
+from src.application.dtos.nutrition_dtos import CreateNutritionPlanRequest, NutritionPlanResponse
 from src.domain.entities.nutrition import NutritionPlan
 from src.domain.repositories.nutrition_repository import NutritionRepository
 
@@ -12,9 +9,7 @@ class CreateNutritionPlan:
     def __init__(self, repository: NutritionRepository):
         self.repository = repository
 
-    async def execute(
-        self, request: CreateNutritionPlanRequest
-    ) -> NutritionPlanResponse:
+    async def execute(self, request: CreateNutritionPlanRequest) -> NutritionPlanResponse:
         plan = NutritionPlan(
             id=uuid4(),
             user_id=request.user_id,
