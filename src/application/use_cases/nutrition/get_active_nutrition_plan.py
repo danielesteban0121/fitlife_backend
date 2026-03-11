@@ -2,6 +2,7 @@ from uuid import UUID
 from src.domain.repositories.nutrition_repository import NutritionRepository
 from src.application.dtos.nutrition_dtos import NutritionPlanResponseDTO, DailyMealDTO
 
+
 class GetActiveNutritionPlan:
     def __init__(self, nutrition_repository: NutritionRepository):
         self.nutrition_repository = nutrition_repository
@@ -9,14 +10,14 @@ class GetActiveNutritionPlan:
     async def execute(self, user_id: UUID) -> NutritionPlanResponseDTO:
         plan = await self.nutrition_repository.get_active_plan_by_user(user_id)
         if not plan:
-            return None # O lanzar DomainException("No active plan") dependiendo del diseño
+            return None  # O lanzar DomainException("No active plan") dependiendo del diseño
 
         meals_dto = [
             DailyMealDTO(
                 meal_type=m.meal_type,
                 description=m.description,
                 calories=m.calories,
-                macros=m.macros
+                macros=m.macros,
             )
             for m in plan.meals
         ]
@@ -30,5 +31,5 @@ class GetActiveNutritionPlan:
             start_date=plan.start_date,
             end_date=plan.end_date,
             meals=meals_dto,
-            is_active=plan.is_active
+            is_active=plan.is_active,
         )

@@ -10,6 +10,7 @@ from src.domain.repositories.nutrition_repository import NutritionRepository
 from src.infrastructure.database.models.nutrition_models import NutritionPlanModel
 from src.infrastructure.mappers.nutrition_mapper import NutritionMapper
 
+
 class SQLAlchemyNutritionRepository(NutritionRepository):
     def __init__(self, session: AsyncSession):
         self.session = session

@@ -9,6 +9,7 @@ from src.domain.repositories.message_repository import MessageRepository
 from src.infrastructure.database.models.message_model import MessageModel
 from src.infrastructure.mappers.message_mapper import MessageMapper
 
+
 class SQLAlchemyMessageRepository(MessageRepository):
     def __init__(self, session: AsyncSession):
         self.session = session
@@ -20,12 +21,15 @@ class SQLAlchemyMessageRepository(MessageRepository):
         await self.session.refresh(model)
         return MessageMapper.to_domain(model)
 
-    async def get_messages_for_user(self, user_id: UUID, skip: int = 0, limit: int = 50) -> List[Message]:
+    async def get_messages_for_user(
+        self, user_id: UUID, skip: int = 0, limit: int = 50
+    ) -> List[Message]:
         result = await self.session.execute(
             select(MessageModel)
             .where(MessageModel.recipient_id == str(user_id))
             .order_by(MessageModel.created_at.desc())
-            .offset(skip).limit(limit)
+            .offset(skip)
+            .limit(limit)
         )
         models = result.scalars().all()
         return [MessageMapper.to_domain(m) for m in models]

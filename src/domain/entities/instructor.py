@@ -3,9 +3,11 @@ from datetime import datetime
 from typing import List, Optional, Dict
 from uuid import UUID
 
+
 @dataclass
 class Instructor:
     """Entidad de dominio para Instructor."""
+
     id: UUID
     user_id: UUID
     certifications: List[str]
@@ -19,9 +21,11 @@ class Instructor:
         self.average_rating = round((current_total + new_rating) / total_ratings_count, 2)
         return self.average_rating
 
+
 @dataclass
 class InstructorAssignment:
     """Entidad para la asignación de un instructor a un usuario."""
+
     id: UUID
     user_id: UUID
     instructor_id: UUID

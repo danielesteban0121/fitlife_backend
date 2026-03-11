@@ -5,12 +5,9 @@ from src.domain.repositories.user_repository import UserRepository
 from src.domain.exceptions.base import DomainException
 from src.application.dtos.message_dtos import SendMessageRequestDTO, SendMessageResponseDTO
 
+
 class SendMessage:
-    def __init__(
-        self,
-        message_repository: MessageRepository,
-        user_repository: UserRepository
-    ):
+    def __init__(self, message_repository: MessageRepository, user_repository: UserRepository):
         self.message_repository = message_repository
         self.user_repository = user_repository
 
@@ -29,13 +26,13 @@ class SendMessage:
             sender_id=request.sender_id,
             recipient_id=request.recipient_id,
             content=request.content,
-            message_type=MessageType.DIRECT if request.sender_id else MessageType.SYSTEM_NOTIFICATION
+            message_type=(
+                MessageType.DIRECT if request.sender_id else MessageType.SYSTEM_NOTIFICATION
+            ),
         )
 
         saved_msg = await self.message_repository.save(msg)
 
         return SendMessageResponseDTO(
-            message_id=saved_msg.id,
-            created_at=saved_msg.created_at,
-            success=True
+            message_id=saved_msg.id, created_at=saved_msg.created_at, success=True
         )

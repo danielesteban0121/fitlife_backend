@@ -3,12 +3,13 @@ from src.domain.repositories.user_repository import UserRepository
 from src.domain.exceptions.base import DomainException
 from src.application.dtos.training_dtos import AssignRoutineRequestDTO, AssignRoutineResponseDTO
 
+
 class AssignRoutine:
     def __init__(
         self,
         training_repository: TrainingRepository,
         user_repository: UserRepository,
-        notification_service=None
+        notification_service=None,
     ):
         self.training_repository = training_repository
         self.user_repository = user_repository
@@ -31,12 +32,7 @@ class AssignRoutine:
         # If a notification service exists, notify the user.
         if self.notification_service:
             await self.notification_service.send_assignment_notification(
-                user_id=request.user_id,
-                assignment_type="rutina",
-                details={"title": routine.title}
+                user_id=request.user_id, assignment_type="rutina", details={"title": routine.title}
             )
 
-        return AssignRoutineResponseDTO(
-            success=True,
-            message="Rutina asignada exitosamente"
-        )
+        return AssignRoutineResponseDTO(success=True, message="Rutina asignada exitosamente")

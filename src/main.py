@@ -19,6 +19,7 @@ from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 from src.config.limiter import limiter
 
+
 def create_app() -> FastAPI:
     app = FastAPI(
         title="FitLife API",
@@ -27,11 +28,12 @@ def create_app() -> FastAPI:
         redoc_url="/redoc",
         lifespan=lifespan,
     )
-    
+
     app.state.limiter = limiter
     app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
     from fastapi.middleware.cors import CORSMiddleware
+
     app.add_middleware(
         CORSMiddleware,
         allow_origins=["*"],  # En produccion usar settings.CORS_ORIGINS
@@ -47,7 +49,7 @@ def create_app() -> FastAPI:
     # Routers
     app.include_router(auth_router)
     app.include_router(assessment_router)
-    
+
     from src.adapters.api.routes.instructor_routes import router as instructor_router
     from src.adapters.api.routes.training_routes import router as training_router
     from src.adapters.api.routes.nutrition_routes import router as nutrition_router

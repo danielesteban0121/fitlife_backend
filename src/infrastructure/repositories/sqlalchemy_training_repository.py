@@ -7,8 +7,13 @@ from sqlalchemy.orm import selectinload
 
 from src.domain.entities.training import Routine, Exercise, WorkoutLog
 from src.domain.repositories.training_repository import TrainingRepository
-from src.infrastructure.database.models.training_models import RoutineModel, ExerciseModel, WorkoutLogModel
+from src.infrastructure.database.models.training_models import (
+    RoutineModel,
+    ExerciseModel,
+    WorkoutLogModel,
+)
 from src.infrastructure.mappers.training_mapper import TrainingMapper
+
 
 class SQLAlchemyTrainingRepository(TrainingRepository):
     def __init__(self, session: AsyncSession):
@@ -18,7 +23,9 @@ class SQLAlchemyTrainingRepository(TrainingRepository):
         model = TrainingMapper.routine_to_model(routine)
 
         for ex_domain in routine.exercises:
-            ex_model = TrainingMapper.routine_exercise_to_model(ex_domain, routine_id=str(routine.id))
+            ex_model = TrainingMapper.routine_exercise_to_model(
+                ex_domain, routine_id=str(routine.id)
+            )
             model.exercises.append(ex_model)
 
         self.session.add(model)

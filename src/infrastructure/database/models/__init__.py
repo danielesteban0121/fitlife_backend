@@ -16,5 +16,5 @@ __all__ = [
     "WorkoutLogModel",
     "NutritionPlanModel",
     "DailyMealModel",
-    "MessageModel"
+    "MessageModel",
 ]

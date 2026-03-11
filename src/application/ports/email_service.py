@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class EmailService(ABC):
     """Puerto de salida para el envío de correos electrónicos."""
 

@@ -1,12 +1,22 @@
 from uuid import UUID
 
 from src.domain.entities.training import Routine, Exercise, RoutineExercise, WorkoutLog
-from src.infrastructure.database.models.training_models import RoutineModel, ExerciseModel, RoutineExerciseModel, WorkoutLogModel
+from src.infrastructure.database.models.training_models import (
+    RoutineModel,
+    ExerciseModel,
+    RoutineExerciseModel,
+    WorkoutLogModel,
+)
+
 
 class TrainingMapper:
     @staticmethod
     def routine_to_domain(model: RoutineModel) -> Routine:
-        exercises = [TrainingMapper.routine_exercise_to_domain(ex) for ex in model.exercises] if model.exercises else []
+        exercises = (
+            [TrainingMapper.routine_exercise_to_domain(ex) for ex in model.exercises]
+            if model.exercises
+            else []
+        )
         return Routine(
             id=UUID(model.id),
             user_id=UUID(model.user_id),
@@ -15,7 +25,7 @@ class TrainingMapper:
             description=model.description,
             created_at=model.created_at,
             is_active=model.is_active,
-            exercises=exercises
+            exercises=exercises,
         )
 
     @staticmethod
@@ -27,9 +37,9 @@ class TrainingMapper:
             title=domain.title,
             description=domain.description,
             created_at=domain.created_at,
-            is_active=domain.is_active
+            is_active=domain.is_active,
         )
-    
+
     @staticmethod
     def routine_exercise_to_domain(model: RoutineExerciseModel) -> RoutineExercise:
         return RoutineExercise(
@@ -37,9 +47,9 @@ class TrainingMapper:
             target_sets=model.target_sets,
             target_reps=model.target_reps,
             rest_seconds=model.rest_seconds,
-            notes=model.notes
+            notes=model.notes,
         )
-    
+
     @staticmethod
     def routine_exercise_to_model(domain: RoutineExercise, routine_id: str) -> RoutineExerciseModel:
         return RoutineExerciseModel(
@@ -48,7 +58,7 @@ class TrainingMapper:
             target_sets=domain.target_sets,
             target_reps=domain.target_reps,
             rest_seconds=domain.rest_seconds,
-            notes=domain.notes
+            notes=domain.notes,
         )
 
     @staticmethod
@@ -58,7 +68,7 @@ class TrainingMapper:
             name=model.name,
             description=model.description,
             category=model.category,
-            video_url=model.video_url
+            video_url=model.video_url,
         )
 
     @staticmethod
@@ -69,7 +79,7 @@ class TrainingMapper:
             user_id=UUID(model.user_id),
             completed_at=model.completed_at,
             notes=model.notes,
-            duration_minutes=model.duration_minutes
+            duration_minutes=model.duration_minutes,
         )
 
     @staticmethod
@@ -80,5 +90,5 @@ class TrainingMapper:
             user_id=str(domain.user_id),
             completed_at=domain.completed_at,
             notes=domain.notes,
-            duration_minutes=domain.duration_minutes
+            duration_minutes=domain.duration_minutes,
         )

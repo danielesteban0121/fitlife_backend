@@ -3,6 +3,7 @@ from uuid import UUID
 from src.domain.entities.message import Message
 from src.infrastructure.database.models.message_model import MessageModel
 
+
 class MessageMapper:
     @staticmethod
     def to_domain(model: MessageModel) -> Message:
@@ -13,7 +14,7 @@ class MessageMapper:
             content=model.content,
             message_type=model.message_type,
             created_at=model.created_at,
-            read_at=model.read_at
+            read_at=model.read_at,
         )
 
     @staticmethod
@@ -25,5 +26,5 @@ class MessageMapper:
             content=domain.content,
             message_type=domain.message_type,
             created_at=domain.created_at,
-            read_at=domain.read_at
+            read_at=domain.read_at,
         )

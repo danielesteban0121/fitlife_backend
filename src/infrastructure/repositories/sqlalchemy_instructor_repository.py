@@ -7,8 +7,15 @@ from sqlalchemy.orm import selectinload
 
 from src.domain.entities.instructor import Instructor, InstructorAssignment
 from src.domain.repositories.instructor_repository import InstructorRepository
-from src.infrastructure.database.models.instructor_model import InstructorModel, InstructorAssignmentModel
-from src.infrastructure.mappers.instructor_mapper import InstructorMapper, InstructorAssignmentMapper
+from src.infrastructure.database.models.instructor_model import (
+    InstructorModel,
+    InstructorAssignmentModel,
+)
+from src.infrastructure.mappers.instructor_mapper import (
+    InstructorMapper,
+    InstructorAssignmentMapper,
+)
+
 
 class SQLAlchemyInstructorRepository(InstructorRepository):
     def __init__(self, session: AsyncSession):
@@ -22,12 +29,16 @@ class SQLAlchemyInstructorRepository(InstructorRepository):
         return InstructorMapper.to_domain(model)
 
     async def find_by_id(self, instructor_id: UUID) -> Optional[Instructor]:
-        result = await self.session.execute(select(InstructorModel).where(InstructorModel.id == str(instructor_id)))
+        result = await self.session.execute(
+            select(InstructorModel).where(InstructorModel.id == str(instructor_id))
+        )
         model = result.scalar_one_or_none()
         return InstructorMapper.to_domain(model) if model else None
 
     async def find_by_user_id(self, user_id: UUID) -> Optional[Instructor]:
-        result = await self.session.execute(select(InstructorModel).where(InstructorModel.user_id == str(user_id)))
+        result = await self.session.execute(
+            select(InstructorModel).where(InstructorModel.user_id == str(user_id))
+        )
         model = result.scalar_one_or_none()
         return InstructorMapper.to_domain(model) if model else None
 

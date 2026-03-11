@@ -1,7 +1,11 @@
 from uuid import UUID
 
 from src.domain.entities.instructor import Instructor, InstructorAssignment
-from src.infrastructure.database.models.instructor_model import InstructorModel, InstructorAssignmentModel
+from src.infrastructure.database.models.instructor_model import (
+    InstructorModel,
+    InstructorAssignmentModel,
+)
+
 
 class InstructorMapper:
     @staticmethod
@@ -12,7 +16,7 @@ class InstructorMapper:
             certifications=model.certifications,
             specializations=model.specializations,
             average_rating=model.average_rating,
-            active_users_count=model.active_users_count
+            active_users_count=model.active_users_count,
         )
 
     @staticmethod
@@ -23,8 +27,9 @@ class InstructorMapper:
             certifications=domain.certifications,
             specializations=domain.specializations,
             average_rating=domain.average_rating,
-            active_users_count=domain.active_users_count
+            active_users_count=domain.active_users_count,
         )
+
 
 class InstructorAssignmentMapper:
     @staticmethod
@@ -35,7 +40,7 @@ class InstructorAssignmentMapper:
             instructor_id=UUID(model.instructor_id),
             is_active=model.is_active,
             assigned_at=model.assigned_at,
-            ended_at=model.ended_at
+            ended_at=model.ended_at,
         )
 
     @staticmethod
@@ -46,5 +51,5 @@ class InstructorAssignmentMapper:
             instructor_id=str(domain.instructor_id),
             is_active=domain.is_active,
             assigned_at=domain.assigned_at,
-            ended_at=domain.ended_at
+            ended_at=domain.ended_at,
         )

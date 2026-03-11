@@ -3,6 +3,7 @@ from uuid import UUID
 from src.domain.entities.nutrition import NutritionPlan, DailyMeal
 from src.infrastructure.database.models.nutrition_models import NutritionPlanModel, DailyMealModel
 
+
 class NutritionMapper:
     @staticmethod
     def plan_to_domain(model: NutritionPlanModel) -> NutritionPlan:
@@ -17,7 +18,7 @@ class NutritionMapper:
             end_date=model.end_date,
             created_at=model.created_at,
             is_active=model.is_active,
-            meals=meals
+            meals=meals,
         )
 
     @staticmethod
@@ -31,9 +32,9 @@ class NutritionMapper:
             start_date=domain.start_date,
             end_date=domain.end_date,
             created_at=domain.created_at,
-            is_active=domain.is_active
+            is_active=domain.is_active,
         )
-    
+
     @staticmethod
     def meal_to_domain(model: DailyMealModel) -> DailyMeal:
         return DailyMeal(
@@ -41,9 +42,9 @@ class NutritionMapper:
             meal_type=model.meal_type,
             description=model.description,
             calories=model.calories,
-            macros=model.macros
+            macros=model.macros,
         )
-    
+
     @staticmethod
     def meal_to_model(domain: DailyMeal, plan_id: str) -> DailyMealModel:
         return DailyMealModel(
@@ -52,5 +53,5 @@ class NutritionMapper:
             meal_type=domain.meal_type,
             description=domain.description,
             calories=domain.calories,
-            macros=domain.macros
+            macros=domain.macros,
         )

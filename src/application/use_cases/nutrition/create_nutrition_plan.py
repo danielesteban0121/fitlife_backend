@@ -4,7 +4,11 @@ from src.domain.repositories.nutrition_repository import NutritionRepository
 from src.domain.repositories.user_repository import UserRepository
 from src.domain.repositories.instructor_repository import InstructorRepository
 from src.domain.exceptions.base import DomainException
-from src.application.dtos.nutrition_dtos import CreateNutritionPlanRequestDTO, CreateNutritionPlanResponseDTO
+from src.application.dtos.nutrition_dtos import (
+    CreateNutritionPlanRequestDTO,
+    CreateNutritionPlanResponseDTO,
+)
+
 
 class CreateNutritionPlan:
     def __init__(
@@ -12,14 +16,16 @@ class CreateNutritionPlan:
         nutrition_repository: NutritionRepository,
         user_repository: UserRepository,
         instructor_repository: InstructorRepository,
-        notification_service=None
+        notification_service=None,
     ):
         self.nutrition_repository = nutrition_repository
         self.user_repository = user_repository
         self.instructor_repository = instructor_repository
         self.notification_service = notification_service
 
-    async def execute(self, request: CreateNutritionPlanRequestDTO) -> CreateNutritionPlanResponseDTO:
+    async def execute(
+        self, request: CreateNutritionPlanRequestDTO
+    ) -> CreateNutritionPlanResponseDTO:
         user = await self.user_repository.find_by_id(request.user_id)
         if not user:
             raise DomainException(f"User {request.user_id} no encontrado")
@@ -40,7 +46,7 @@ class CreateNutritionPlan:
                 meal_type=m.meal_type,
                 description=m.description,
                 calories=m.calories,
-                macros=m.macros
+                macros=m.macros,
             )
             for m in request.meals
         ]
@@ -53,7 +59,7 @@ class CreateNutritionPlan:
             macro_distribution=request.macro_distribution,
             start_date=request.start_date,
             end_date=request.end_date,
-            meals=meals_domain
+            meals=meals_domain,
         )
 
         saved_plan = await self.nutrition_repository.save_plan(plan)
@@ -63,11 +69,11 @@ class CreateNutritionPlan:
             await self.notification_service.send_assignment_notification(
                 user_id=request.user_id,
                 assignment_type="plan de nutrición",
-                details={"target_calories": saved_plan.target_calories}
+                details={"target_calories": saved_plan.target_calories},
             )
 
         return CreateNutritionPlanResponseDTO(
             plan_id=saved_plan.id,
             created_at=saved_plan.created_at,
-            message="Plan de nutrición creado y asignado exitosamente"
+            message="Plan de nutrición creado y asignado exitosamente",
         )

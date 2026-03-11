@@ -6,12 +6,13 @@ from src.domain.repositories.instructor_repository import InstructorRepository
 from src.domain.exceptions.base import DomainException
 from src.application.dtos.training_dtos import CreateRoutineRequestDTO, CreateRoutineResponseDTO
 
+
 class CreateRoutine:
     def __init__(
         self,
         training_repository: TrainingRepository,
         user_repository: UserRepository,
-        instructor_repository: InstructorRepository
+        instructor_repository: InstructorRepository,
     ):
         self.training_repository = training_repository
         self.user_repository = user_repository
@@ -32,7 +33,7 @@ class CreateRoutine:
                 target_sets=ex.target_sets,
                 target_reps=ex.target_reps,
                 rest_seconds=ex.rest_seconds,
-                notes=ex.notes
+                notes=ex.notes,
             )
             for ex in request.exercises
         ]
@@ -43,7 +44,7 @@ class CreateRoutine:
             instructor_id=request.instructor_id,
             title=request.title,
             description=request.description,
-            exercises=exercises_domain
+            exercises=exercises_domain,
         )
 
         saved_routine = await self.training_repository.save_routine(routine)
@@ -51,5 +52,5 @@ class CreateRoutine:
         return CreateRoutineResponseDTO(
             routine_id=saved_routine.id,
             title=saved_routine.title,
-            created_at=saved_routine.created_at
+            created_at=saved_routine.created_at,
         )

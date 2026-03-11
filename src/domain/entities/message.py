@@ -4,15 +4,18 @@ from enum import Enum
 from typing import Optional
 from uuid import UUID
 
+
 class MessageType(str, Enum):
     DIRECT = "DIRECT"
     SYSTEM_NOTIFICATION = "SYSTEM_NOTIFICATION"
 
+
 @dataclass
 class Message:
     """Entidad de dominio para Mensajes y Notificaciones."""
+
     id: UUID
-    sender_id: Optional[UUID] # None para notificaciones del sistema
+    sender_id: Optional[UUID]  # None para notificaciones del sistema
     recipient_id: UUID
     content: str
     message_type: MessageType = MessageType.DIRECT
