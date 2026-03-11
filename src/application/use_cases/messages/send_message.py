@@ -3,7 +3,7 @@ from src.domain.entities.message import Message, MessageType
 from src.domain.repositories.message_repository import MessageRepository
 from src.domain.repositories.user_repository import UserRepository
 from src.domain.exceptions.base import DomainException
-from src.application.dtos.message_dtos import SendMessageRequestDTO, SendMessageResponseDTO
+from src.application.dtos.message_dtos import SendMessageRequest, SendMessageResponse
 
 
 class SendMessage:
@@ -11,7 +11,7 @@ class SendMessage:
         self.message_repository = message_repository
         self.user_repository = user_repository
 
-    async def execute(self, request: SendMessageRequestDTO) -> SendMessageResponseDTO:
+    async def execute(self, request: SendMessageRequest) -> SendMessageResponse:
         recipient = await self.user_repository.find_by_id(request.recipient_id)
         if not recipient:
             raise DomainException(f"Recipient {request.recipient_id} no encontrado")
@@ -33,6 +33,6 @@ class SendMessage:
 
         saved_msg = await self.message_repository.save(msg)
 
-        return SendMessageResponseDTO(
+        return SendMessageResponse(
             message_id=saved_msg.id, created_at=saved_msg.created_at, success=True
         )

@@ -1,36 +1,24 @@
+from datetime import datetime
 from uuid import UUID
+from src.application.dtos.nutrition_dtos import NutritionPlanResponse
 from src.domain.repositories.nutrition_repository import NutritionRepository
-from src.application.dtos.nutrition_dtos import NutritionPlanResponseDTO, DailyMealDTO
-from typing import Optional
 
 
 class GetActiveNutritionPlan:
-    def __init__(self, nutrition_repository: NutritionRepository):
-        self.nutrition_repository = nutrition_repository
+    def __init__(self, repository: NutritionRepository):
+        self.repository = repository
 
-    async def execute(self, user_id: UUID) -> Optional[NutritionPlanResponseDTO]:
-        plan = await self.nutrition_repository.get_active_plan_by_user(user_id)
+    async def execute(self, user_id: UUID) -> NutritionPlanResponse | None:
+        plan = await self.repository.find_active_by_user_id(user_id)
+        
         if not plan:
-            return None  # O lanzar DomainException("No active plan") dependiendo del diseño
-
-        meals_dto = [
-            DailyMealDTO(
-                meal_type=m.meal_type,
-                description=m.description,
-                calories=m.calories,
-                macros=m.macros,
-            )
-            for m in plan.meals
-        ]
-
-        return NutritionPlanResponseDTO(
-            plan_id=plan.id,
-            user_id=plan.user_id,
-            instructor_id=plan.instructor_id,
-            target_calories=plan.target_calories,
-            macro_distribution=plan.macro_distribution,
-            start_date=plan.start_date,
-            end_date=plan.end_date,
-            meals=meals_dto,
-            is_active=plan.is_active,
+            return None
+            
+        return NutritionPlanResponse(
+            id=str(plan.id),
+            name=plan.name,
+            description=plan.description,
+            instructor_id=str(plan.instructor_id),
+            is_active=True,
+            created_at=datetime.utcnow()  # In a real scenario, this would come from the plan itself
         )

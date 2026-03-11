@@ -1,16 +1,16 @@
 from src.domain.repositories.instructor_repository import InstructorRepository
-from src.application.dtos.instructor_dtos import ListInstructorsResponseDTO, InstructorResponseDTO
+from src.application.dtos.instructor_dtos import ListInstructorsResponse, InstructorResponse
 
 
 class ListInstructors:
     def __init__(self, instructor_repository: InstructorRepository):
         self.instructor_repository = instructor_repository
 
-    async def execute(self, skip: int = 0, limit: int = 100) -> ListInstructorsResponseDTO:
+    async def execute(self, skip: int = 0, limit: int = 100) -> ListInstructorsResponse:
         instructors = await self.instructor_repository.get_all(skip=skip, limit=limit)
 
         dto_list = [
-            InstructorResponseDTO(
+            InstructorResponse(
                 id=inst.id,
                 user_id=inst.user_id,
                 certifications=inst.certifications,
@@ -21,4 +21,4 @@ class ListInstructors:
             for inst in instructors
         ]
 
-        return ListInstructorsResponseDTO(instructors=dto_list, total=len(dto_list))
+        return ListInstructorsResponse(instructors=dto_list, total=len(dto_list))

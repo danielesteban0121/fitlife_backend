@@ -6,20 +6,20 @@ from src.adapters.api.dependencies_phase_f import (
     get_complete_workout,
 )
 from src.application.dtos.training_dtos import (
-    CreateRoutineRequestDTO,
-    CreateRoutineResponseDTO,
-    AssignRoutineRequestDTO,
-    AssignRoutineResponseDTO,
-    CompleteWorkoutRequestDTO,
-    CompleteWorkoutResponseDTO,
+    CreateRoutineRequest,
+    CreateRoutineResponse,
+    AssignRoutineRequest,
+    AssignRoutineResponse,
+    CompleteWorkoutRequest,
+    CompleteWorkoutResponse,
 )
 
 router = APIRouter(prefix="/api/training", tags=["Training"])
 
 
-@router.post("/routines", response_model=CreateRoutineResponseDTO)
+@router.post("/routines", response_model=CreateRoutineResponse)
 async def create_routine(
-    request: CreateRoutineRequestDTO,
+    request: CreateRoutineRequest,
     use_case=Depends(get_create_routine),
     current_user: dict = Depends(get_current_user),
 ):
@@ -27,18 +27,18 @@ async def create_routine(
     return await use_case.execute(request)
 
 
-@router.post("/routines/assign", response_model=AssignRoutineResponseDTO)
+@router.post("/routines/assign", response_model=AssignRoutineResponse)
 async def assign_routine(
-    request: AssignRoutineRequestDTO,
+    request: AssignRoutineRequest,
     use_case=Depends(get_assign_routine),
     current_user: dict = Depends(get_current_user),
 ):
     return await use_case.execute(request)
 
 
-@router.post("/workouts/complete", response_model=CompleteWorkoutResponseDTO)
+@router.post("/workouts/complete", response_model=CompleteWorkoutResponse)
 async def complete_workout(
-    request: CompleteWorkoutRequestDTO,
+    request: CompleteWorkoutRequest,
     use_case=Depends(get_complete_workout),
     current_user: dict = Depends(get_current_user),
 ):

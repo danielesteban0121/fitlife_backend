@@ -3,7 +3,7 @@ from src.domain.entities.training import WorkoutLog
 from src.domain.repositories.training_repository import TrainingRepository
 from src.domain.repositories.user_repository import UserRepository
 from src.domain.exceptions.base import DomainException
-from src.application.dtos.training_dtos import CompleteWorkoutRequestDTO, CompleteWorkoutResponseDTO
+from src.application.dtos.training_dtos import CompleteWorkoutRequest, CompleteWorkoutResponse
 
 
 class CompleteWorkout:
@@ -11,7 +11,7 @@ class CompleteWorkout:
         self.training_repository = training_repository
         self.user_repository = user_repository
 
-    async def execute(self, request: CompleteWorkoutRequestDTO) -> CompleteWorkoutResponseDTO:
+    async def execute(self, request: CompleteWorkoutRequest) -> CompleteWorkoutResponse:
         user = await self.user_repository.find_by_id(request.user_id)
         if not user:
             raise DomainException(f"User {request.user_id} no encontrado")
@@ -30,7 +30,7 @@ class CompleteWorkout:
 
         saved_log = await self.training_repository.save_workout_log(workout_log)
 
-        return CompleteWorkoutResponseDTO(
+        return CompleteWorkoutResponse(
             log_id=saved_log.id,
             routine_id=saved_log.routine_id,
             completed_at=saved_log.completed_at,

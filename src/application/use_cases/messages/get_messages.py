@@ -1,7 +1,7 @@
 from typing import List
 from uuid import UUID
 from src.domain.repositories.message_repository import MessageRepository
-from src.application.dtos.message_dtos import MessageResponseDTO
+from src.application.dtos.message_dtos import MessageResponse
 
 
 class GetMessages:
@@ -10,19 +10,13 @@ class GetMessages:
 
     async def execute(
         self, user_id: UUID, skip: int = 0, limit: int = 50
-    ) -> List[MessageResponseDTO]:
+    ) -> List[MessageResponse]:
         messages = await self.message_repository.get_messages_for_user(
             user_id, skip=skip, limit=limit
         )
 
-        # Opcional: Marcar como leídos al obtenerlos si se considera apropiado
-        # for msg in messages:
-        #     if not msg.read_at:
-        #         msg.mark_as_read()
-        #         await self.message_repository.save(msg)
-
         return [
-            MessageResponseDTO(
+            MessageResponse(
                 id=m.id,
                 sender_id=m.sender_id,
                 recipient_id=m.recipient_id,

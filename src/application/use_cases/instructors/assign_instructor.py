@@ -3,8 +3,8 @@ from src.domain.repositories.instructor_repository import InstructorRepository
 from src.domain.repositories.user_repository import UserRepository
 from src.domain.exceptions.base import DomainException
 from src.application.dtos.instructor_dtos import (
-    AssignInstructorRequestDTO,
-    AssignInstructorResponseDTO,
+    AssignInstructorRequest,
+    AssignInstructorResponse,
 )
 import uuid
 
@@ -16,7 +16,7 @@ class AssignInstructor:
         self.instructor_repository = instructor_repository
         self.user_repository = user_repository
 
-    async def execute(self, request: AssignInstructorRequestDTO) -> AssignInstructorResponseDTO:
+    async def execute(self, request: AssignInstructorRequest) -> AssignInstructorResponse:
         user = await self.user_repository.find_by_id(request.user_id)
         if not user:
             raise DomainException(f"User {request.user_id} no encontrado")
@@ -53,7 +53,7 @@ class AssignInstructor:
         instructor.active_users_count += 1
         await self.instructor_repository.save(instructor)
 
-        return AssignInstructorResponseDTO(
+        return AssignInstructorResponse(
             assignment_id=saved_assignment.id,
             user_id=saved_assignment.user_id,
             instructor_id=saved_assignment.instructor_id,

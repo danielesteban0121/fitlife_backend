@@ -5,7 +5,7 @@ from uuid import UUID
 from src.domain.entities.message import MessageType
 
 
-class MessageResponseDTO(BaseModel):
+class MessageResponse(BaseModel):
     id: UUID
     sender_id: Optional[UUID]
     recipient_id: UUID
@@ -15,13 +15,13 @@ class MessageResponseDTO(BaseModel):
     read_at: Optional[datetime]
 
 
-class SendMessageRequestDTO(BaseModel):
+class SendMessageRequest(BaseModel):
     sender_id: Optional[UUID]
     recipient_id: UUID
     content: str
 
 
-class SendMessageResponseDTO(BaseModel):
+class SendMessageResponse(BaseModel):
     message_id: UUID
     created_at: datetime
     success: bool

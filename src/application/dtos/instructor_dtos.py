@@ -4,7 +4,7 @@ from datetime import datetime
 from uuid import UUID
 
 
-class InstructorResponseDTO(BaseModel):
+class InstructorResponse(BaseModel):
     id: UUID
     user_id: UUID
     certifications: List[str]
@@ -13,17 +13,17 @@ class InstructorResponseDTO(BaseModel):
     active_users_count: int
 
 
-class ListInstructorsResponseDTO(BaseModel):
-    instructors: List[InstructorResponseDTO]
+class ListInstructorsResponse(BaseModel):
+    instructors: List[InstructorResponse]
     total: int
 
 
-class AssignInstructorRequestDTO(BaseModel):
+class AssignInstructorRequest(BaseModel):
     user_id: UUID
     instructor_id: UUID
 
 
-class AssignInstructorResponseDTO(BaseModel):
+class AssignInstructorResponse(BaseModel):
     assignment_id: UUID
     user_id: UUID
     instructor_id: UUID
@@ -31,11 +31,11 @@ class AssignInstructorResponseDTO(BaseModel):
     assigned_at: datetime
 
 
-class RateInstructorRequestDTO(BaseModel):
+class RateInstructorRequest(BaseModel):
     instructor_id: UUID
     rating: float = Field(..., ge=1.0, le=5.0)
 
 
-class RateInstructorResponseDTO(BaseModel):
+class RateInstructorResponse(BaseModel):
     instructor_id: UUID
     new_average_rating: float

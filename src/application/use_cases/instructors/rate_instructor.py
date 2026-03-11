@@ -1,13 +1,13 @@
 from src.domain.repositories.instructor_repository import InstructorRepository
 from src.domain.exceptions.base import DomainException
-from src.application.dtos.instructor_dtos import RateInstructorRequestDTO, RateInstructorResponseDTO
+from src.application.dtos.instructor_dtos import RateInstructorRequest, RateInstructorResponse
 
 
 class RateInstructor:
     def __init__(self, instructor_repository: InstructorRepository):
         self.instructor_repository = instructor_repository
 
-    async def execute(self, request: RateInstructorRequestDTO) -> RateInstructorResponseDTO:
+    async def execute(self, request: RateInstructorRequest) -> RateInstructorResponse:
         instructor = await self.instructor_repository.find_by_id(request.instructor_id)
         if not instructor:
             raise DomainException(f"Instructor {request.instructor_id} no encontrado")
@@ -19,4 +19,4 @@ class RateInstructor:
 
         await self.instructor_repository.save(instructor)
 
-        return RateInstructorResponseDTO(instructor_id=instructor.id, new_average_rating=new_avg)
+        return RateInstructorResponse(instructor_id=instructor.id, new_average_rating=new_avg)
