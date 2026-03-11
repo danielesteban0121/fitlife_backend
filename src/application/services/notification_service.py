@@ -35,7 +35,8 @@ class NotificationService:
             # o implementamos un hook extra para resolver el email.
             try:
                 # Mock resolution
-                to_email = "resolved_user@example.com"  # Requires fetching User entity to get the real email
+                # Requires fetching User entity to get the real email
+                to_email = "resolved_user@example.com"
                 await self.email_service.send_email(
                     to=to_email, subject=f"Nuevo {assignment_type} asignado - FitLife", body=content
                 )

@@ -3,7 +3,6 @@ from uuid import UUID
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.orm import selectinload
 
 from src.domain.entities.instructor import Instructor, InstructorAssignment
 from src.domain.repositories.instructor_repository import InstructorRepository
@@ -58,7 +57,7 @@ class SQLAlchemyInstructorRepository(InstructorRepository):
         result = await self.session.execute(
             select(InstructorAssignmentModel)
             .where(InstructorAssignmentModel.user_id == str(user_id))
-            .where(InstructorAssignmentModel.is_active == True)
+            .where(InstructorAssignmentModel.is_active.is_(True))
         )
         model = result.scalar_one_or_none()
         return InstructorAssignmentMapper.to_domain(model) if model else None

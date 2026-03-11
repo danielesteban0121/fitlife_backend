@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Request
 
 from src.adapters.api.dependencies import (
     get_login_user,
@@ -13,7 +13,6 @@ from src.adapters.api.schemas.auth_schemas import (
 )
 from src.application.dtos.auth_dtos import RegisterUserRequest
 
-from fastapi import APIRouter, Depends, Request
 from src.config.limiter import limiter
 
 router = APIRouter(prefix="/api/auth", tags=["Auth"])

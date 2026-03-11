@@ -6,6 +6,9 @@ from src.adapters.api.middleware.error_handler import domain_exception_handler
 from src.adapters.api.routes.assessment_routes import router as assessment_router
 from src.adapters.api.routes.auth_routes import router as auth_router
 from src.domain.exceptions.base import DomainException
+from slowapi import _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
+from src.config.limiter import limiter
 
 
 @asynccontextmanager
@@ -13,11 +16,6 @@ async def lifespan(app: FastAPI):
     print("🚀 Application startup")
     yield
     print("🛑 Application shutdown")
-
-
-from slowapi import _rate_limit_exceeded_handler
-from slowapi.errors import RateLimitExceeded
-from src.config.limiter import limiter
 
 
 def create_app() -> FastAPI:

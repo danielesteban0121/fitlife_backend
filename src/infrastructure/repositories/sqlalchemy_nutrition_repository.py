@@ -1,4 +1,4 @@
-from typing import Optional, List
+from typing import Optional
 from uuid import UUID
 
 from sqlalchemy import select
@@ -41,7 +41,7 @@ class SQLAlchemyNutritionRepository(NutritionRepository):
             select(NutritionPlanModel)
             .options(selectinload(NutritionPlanModel.meals))
             .where(NutritionPlanModel.user_id == str(user_id))
-            .where(NutritionPlanModel.is_active == True)
+            .where(NutritionPlanModel.is_active.is_(True))
         )
         model = result.scalar_one_or_none()
         return NutritionMapper.plan_to_domain(model) if model else None

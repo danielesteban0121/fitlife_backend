@@ -38,6 +38,6 @@ class SQLAlchemyMessageRepository(MessageRepository):
         result = await self.session.execute(
             select(func.count(MessageModel.id))
             .where(MessageModel.recipient_id == str(user_id))
-            .where(MessageModel.read_at == None)
+            .where(MessageModel.read_at.is_(None))
         )
         return result.scalar_one() or 0

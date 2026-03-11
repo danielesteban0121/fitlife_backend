@@ -25,7 +25,8 @@ class AssignRoutine:
             raise DomainException(f"Routine {request.routine_id} no encontrada")
 
         if routine.user_id != request.user_id:
-            # We assign by cloning or updating if needed. But our domain says routine.user_id is the owner.
+            # We assign by cloning or updating if needed.
+            # But our domain says routine.user_id is the owner.
             # Assuming CreateRoutine already assigned it to the user.
             pass
 
