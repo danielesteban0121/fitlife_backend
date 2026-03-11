@@ -13,11 +13,16 @@ from src.adapters.api.schemas.auth_schemas import (
 )
 from src.application.dtos.auth_dtos import RegisterUserRequest
 
+from fastapi import APIRouter, Depends, Request
+from src.config.limiter import limiter
+
 router = APIRouter(prefix="/api/auth", tags=["Auth"])
 
 
 @router.post("/register", response_model=TokenResponse)
+@limiter.limit("5/minute")
 async def register(
+    request: Request,
     data: RegisterRequest,
     use_case=Depends(get_register_user),
 ):
@@ -31,7 +36,9 @@ async def register(
 
 
 @router.post("/login", response_model=TokenResponse)
+@limiter.limit("5/minute")
 async def login(
+    request: Request,
     data: LoginRequest,
     use_case=Depends(get_login_user),
 ):

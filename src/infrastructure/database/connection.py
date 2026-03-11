@@ -8,7 +8,13 @@ from sqlalchemy.ext.asyncio import (
 
 from src.infrastructure.database.base import Base
 
-DATABASE_URL = "sqlite+aiosqlite:///./fitlife.db"
+import sys
+import os
+
+if "pytest" in sys.modules or os.environ.get("TESTING") == "1":
+    DATABASE_URL = "sqlite+aiosqlite:///./test.db"
+else:
+    DATABASE_URL = "sqlite+aiosqlite:///./fitlife.db"
 
 engine = create_async_engine(
     DATABASE_URL,
