@@ -1,5 +1,5 @@
 from datetime import datetime
-from uuid import UUID, uuid4
+from uuid import uuid4
 
 from src.application.dtos.training_dtos import CreateRoutineRequest, RoutineResponse
 from src.domain.entities.training import Routine

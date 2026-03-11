@@ -1,4 +1,4 @@
-from datetime import date
+
 from uuid import UUID
 
 from src.domain.entities.user_profile import UserProfile

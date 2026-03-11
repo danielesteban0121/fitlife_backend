@@ -1,4 +1,4 @@
-from uuid import UUID, uuid4
+from uuid import uuid4
 
 from src.application.dtos.nutrition_dtos import CreateNutritionPlanRequest, NutritionPlanResponse
 from src.domain.entities.nutrition import NutritionPlan

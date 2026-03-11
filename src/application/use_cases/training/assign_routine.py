@@ -1,4 +1,3 @@
-from uuid import UUID
 
 from src.application.dtos.training_dtos import AssignRoutineRequest
 from src.application.services.notification_service import NotificationService
