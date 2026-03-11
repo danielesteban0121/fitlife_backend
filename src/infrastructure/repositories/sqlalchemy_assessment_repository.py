@@ -66,6 +66,30 @@ class SQLAlchemyAssessmentRepository(AssessmentRepository):
             created_at=model.created_at,
         )
 
+    async def find_history_by_user_id(self, user_id: str) -> list[Assessment]:
+        stmt = (
+            select(AssessmentModel)
+            .where(AssessmentModel.user_id == user_id)
+            .order_by(AssessmentModel.created_at.desc())
+        )
+        result = await self.session.execute(stmt)
+        models = result.scalars().all()
+        return [
+            Assessment(
+                id=m.id,
+                user_id=m.user_id,
+                goal=m.goal,
+                activity_level=m.activity_level,
+                experience_level=m.experience_level,
+                height_cm=m.height_cm,
+                weight_kg=m.weight_kg,
+                age=m.age,
+                fitness_score=m.fitness_score,
+                created_at=m.created_at,
+            )
+            for m in models
+        ]
+
     async def delete_by_user_id(self, user_id: str) -> None:
         stmt = delete(AssessmentModel).where(AssessmentModel.user_id == user_id)
         await self.session.execute(stmt)

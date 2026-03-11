@@ -9,14 +9,13 @@ from src.adapters.api.dependencies_phase_f import (
 )
 from src.application.dtos.nutrition_dtos import (
     CreateNutritionPlanRequest,
-    CreateNutritionPlanResponse,
     NutritionPlanResponse,
 )
 
 router = APIRouter(prefix="/api/nutrition", tags=["Nutrition"])
 
 
-@router.post("/plans", response_model=CreateNutritionPlanResponse)
+@router.post("/plans", response_model=NutritionPlanResponse)
 async def create_nutrition_plan(
     request: CreateNutritionPlanRequest,
     use_case=Depends(get_create_nutrition_plan),

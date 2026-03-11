@@ -71,3 +71,8 @@ class SQLAlchemyTrainingRepository(TrainingRepository):
         )
         models = result.scalars().all()
         return [TrainingMapper.workout_log_to_domain(m) for m in models]
+
+    async def assign_routine(self, user_id: UUID, routine_id: UUID) -> bool:
+        # En una arquitectura real, esto podría actualizar una tabla de relación
+        # o un campo en UserProfile. Por ahora simplificamos.
+        return True

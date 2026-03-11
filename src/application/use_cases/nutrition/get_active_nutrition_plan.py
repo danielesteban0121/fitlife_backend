@@ -1,4 +1,3 @@
-from datetime import datetime
 from uuid import UUID
 
 from src.application.dtos.nutrition_dtos import NutritionPlanResponse
@@ -17,9 +16,11 @@ class GetActiveNutritionPlan:
 
         return NutritionPlanResponse(
             id=str(plan.id),
-            name=plan.name,
-            description=plan.description,
             instructor_id=str(plan.instructor_id),
-            is_active=True,
-            created_at=datetime.utcnow(),  # In real scenario, this comes from the plan
+            is_active=plan.is_active,
+            created_at=plan.created_at,
+            target_calories=plan.target_calories,
+            macro_distribution=plan.macro_distribution,
+            start_date=plan.start_date,
+            end_date=plan.end_date,
         )

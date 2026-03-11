@@ -65,18 +65,14 @@ def get_rate_instructor(db: AsyncSession = Depends(get_db)) -> RateInstructor:
 
 # --- Training ---
 def get_create_routine(db: AsyncSession = Depends(get_db)) -> CreateRoutine:
-    return CreateRoutine(
-        SQLAlchemyTrainingRepository(db),
-        SQLAlchemyUserRepository(db),
-        SQLAlchemyInstructorRepository(db),
-    )
+    return CreateRoutine(SQLAlchemyTrainingRepository(db))
 
 
 def get_assign_routine(
     db: AsyncSession = Depends(get_db),
     notif: NotificationService = Depends(get_notification_service),
 ) -> AssignRoutine:
-    return AssignRoutine(SQLAlchemyTrainingRepository(db), SQLAlchemyUserRepository(db), notif)
+    return AssignRoutine(SQLAlchemyTrainingRepository(db), notif)
 
 
 def get_complete_workout(db: AsyncSession = Depends(get_db)) -> CompleteWorkout:
@@ -88,12 +84,7 @@ def get_create_nutrition_plan(
     db: AsyncSession = Depends(get_db),
     notif: NotificationService = Depends(get_notification_service),
 ) -> CreateNutritionPlan:
-    return CreateNutritionPlan(
-        SQLAlchemyNutritionRepository(db),
-        SQLAlchemyUserRepository(db),
-        SQLAlchemyInstructorRepository(db),
-        notif,
-    )
+    return CreateNutritionPlan(SQLAlchemyNutritionRepository(db))
 
 
 def get_get_active_nutrition_plan(db: AsyncSession = Depends(get_db)) -> GetActiveNutritionPlan:

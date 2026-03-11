@@ -1,3 +1,4 @@
+from datetime import date
 from sqlalchemy import Date, Float, String
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -10,5 +11,5 @@ class UserProfileModel(Base):
     id: Mapped[str] = mapped_column(String, primary_key=True)
     user_id: Mapped[str] = mapped_column(String, index=True)
     full_name: Mapped[str] = mapped_column(String)
-    date_of_birth: Mapped[Date | None] = mapped_column(Date, nullable=True)
+    date_of_birth: Mapped[date | None] = mapped_column(Date, nullable=True)
     height_cm: Mapped[float | None] = mapped_column(Float, nullable=True)

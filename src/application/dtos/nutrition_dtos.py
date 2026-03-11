@@ -32,8 +32,6 @@ class CreateNutritionPlanResponse(BaseModel):
 
 class NutritionPlanResponse(BaseModel):
     id: str
-    name: str
-    description: str
     instructor_id: str
     is_active: bool
     created_at: datetime

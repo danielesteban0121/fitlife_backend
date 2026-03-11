@@ -10,19 +10,20 @@ class CreateRoutine:
     def __init__(self, repository: TrainingRepository):
         self.repository = repository
 
-    async def execute(self, instructor_id: UUID, request: CreateRoutineRequest) -> RoutineResponse:
+    async def execute(self, request: CreateRoutineRequest) -> RoutineResponse:
         routine = Routine(
             id=uuid4(),
-            name=request.name,
+            user_id=request.user_id,
+            instructor_id=request.instructor_id,
+            title=request.title,
             description=request.description,
-            instructor_id=instructor_id,
-            exercises=[],  # Exercises would be added here in a more detailed flow
+            exercises=[],
         )
         saved_routine = await self.repository.save_routine(routine)
 
         return RoutineResponse(
             id=str(saved_routine.id),
-            name=saved_routine.name,
+            title=saved_routine.title,
             description=saved_routine.description,
             instructor_id=str(saved_routine.instructor_id),
             created_at=datetime.utcnow(),

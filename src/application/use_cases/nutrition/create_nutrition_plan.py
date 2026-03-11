@@ -1,4 +1,3 @@
-from datetime import datetime
 from uuid import UUID, uuid4
 
 from src.application.dtos.nutrition_dtos import CreateNutritionPlanRequest, NutritionPlanResponse
@@ -11,22 +10,27 @@ class CreateNutritionPlan:
         self.repository = repository
 
     async def execute(
-        self, instructor_id: UUID, request: CreateNutritionPlanRequest
+        self, request: CreateNutritionPlanRequest
     ) -> NutritionPlanResponse:
         plan = NutritionPlan(
             id=uuid4(),
-            name=request.name,
-            description=request.description,
-            instructor_id=instructor_id,
+            user_id=request.user_id,
+            instructor_id=request.instructor_id,
+            target_calories=request.target_calories,
+            macro_distribution=request.macro_distribution,
+            start_date=request.start_date,
+            end_date=request.end_date,
             meals=[],
         )
         saved_plan = await self.repository.save_plan(plan)
 
         return NutritionPlanResponse(
             id=str(saved_plan.id),
-            name=saved_plan.name,
-            description=saved_plan.description,
             instructor_id=str(saved_plan.instructor_id),
-            is_active=True,
-            created_at=datetime.utcnow(),
+            is_active=saved_plan.is_active,
+            created_at=saved_plan.created_at,
+            target_calories=saved_plan.target_calories,
+            macro_distribution=saved_plan.macro_distribution,
+            start_date=saved_plan.start_date,
+            end_date=saved_plan.end_date,
         )

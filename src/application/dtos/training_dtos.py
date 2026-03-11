@@ -23,7 +23,7 @@ class CreateRoutineRequest(BaseModel):
 
 class RoutineResponse(BaseModel):
     id: str
-    name: str
+    title: str
     description: str
     instructor_id: str
     created_at: datetime

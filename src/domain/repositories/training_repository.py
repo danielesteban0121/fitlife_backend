@@ -31,3 +31,7 @@ class TrainingRepository(ABC):
     @abstractmethod
     async def get_workout_history(self, user_id: UUID) -> List[WorkoutLog]:
         pass
+
+    @abstractmethod
+    async def assign_routine(self, user_id: UUID, routine_id: UUID) -> bool:
+        """Asigna una rutina a un usuario."""

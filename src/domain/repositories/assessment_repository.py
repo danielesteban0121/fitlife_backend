@@ -15,5 +15,9 @@ class AssessmentRepository(ABC):
         pass
 
     @abstractmethod
+    async def find_history_by_user_id(self, user_id: str) -> list[Assessment]:
+        """Recupera el historial de evaluaciones de un usuario."""
+
+    @abstractmethod
     async def delete_by_user_id(self, user_id: str) -> None:
         pass

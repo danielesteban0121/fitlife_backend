@@ -21,3 +21,4 @@ htmlcov/
 *.sqlite
 *.sqlite3
 fitlife.db
+test.db

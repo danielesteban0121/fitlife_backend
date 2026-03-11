@@ -1,3 +1,4 @@
+from datetime import datetime
 from src.application.dtos.assessment_dtos import AssessmentResponse
 from src.domain.repositories.assessment_repository import AssessmentRepository
 
@@ -7,7 +8,7 @@ class GetAssessmentHistory:
         self.repository = repository
 
     async def execute(self, user_id: str) -> list[AssessmentResponse]:
-        assessments = await self.repository.find_by_user_id(user_id)
+        assessments = await self.repository.find_history_by_user_id(user_id)
 
         return [
             AssessmentResponse(
@@ -20,7 +21,7 @@ class GetAssessmentHistory:
                 weight_kg=a.weight_kg,
                 age=a.age,
                 fitness_score=a.fitness_score,
-                created_at=a.created_at,
+                created_at=a.created_at or datetime.utcnow(),
             )
             for a in assessments
         ]

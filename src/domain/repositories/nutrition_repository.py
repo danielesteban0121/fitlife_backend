@@ -19,3 +19,7 @@ class NutritionRepository(ABC):
     @abstractmethod
     async def get_active_plan_by_user(self, user_id: UUID) -> Optional[NutritionPlan]:
         pass
+
+    @abstractmethod
+    async def find_active_by_user_id(self, user_id: UUID) -> Optional[NutritionPlan]:
+        """Busca el plan activo de un usuario."""

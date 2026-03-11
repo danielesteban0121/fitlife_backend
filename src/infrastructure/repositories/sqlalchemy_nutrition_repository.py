@@ -45,3 +45,6 @@ class SQLAlchemyNutritionRepository(NutritionRepository):
         )
         model = result.scalar_one_or_none()
         return NutritionMapper.plan_to_domain(model) if model else None
+
+    async def find_active_by_user_id(self, user_id: UUID) -> Optional[NutritionPlan]:
+        return await self.get_active_plan_by_user(user_id)

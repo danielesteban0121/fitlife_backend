@@ -12,13 +12,13 @@ from src.application.dtos.training_dtos import (
     CompleteWorkoutRequest,
     CompleteWorkoutResponse,
     CreateRoutineRequest,
-    CreateRoutineResponse,
+    RoutineResponse,
 )
 
 router = APIRouter(prefix="/api/training", tags=["Training"])
 
 
-@router.post("/routines", response_model=CreateRoutineResponse)
+@router.post("/routines", response_model=RoutineResponse)
 async def create_routine(
     request: CreateRoutineRequest,
     use_case=Depends(get_create_routine),
