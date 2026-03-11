@@ -1,4 +1,3 @@
-
 from src.application.dtos.training_dtos import AssignRoutineRequest
 from src.application.services.notification_service import NotificationService
 from src.domain.repositories.training_repository import TrainingRepository

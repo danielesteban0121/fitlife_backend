@@ -1,4 +1,3 @@
-
 from uuid import UUID
 
 from src.domain.entities.user_profile import UserProfile
