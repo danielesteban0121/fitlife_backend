@@ -1,12 +1,14 @@
-from fastapi import APIRouter, Depends
 from typing import List
 from uuid import UUID
+
+from fastapi import APIRouter, Depends
+
 from src.adapters.api.dependencies import get_current_user
-from src.adapters.api.dependencies_phase_f import get_send_message, get_get_messages
+from src.adapters.api.dependencies_phase_f import get_get_messages, get_send_message
 from src.application.dtos.message_dtos import (
+    MessageResponse,
     SendMessageRequest,
     SendMessageResponse,
-    MessageResponse,
 )
 
 router = APIRouter(prefix="/api/messages", tags=["Messages"])

@@ -1,16 +1,15 @@
 from typing import List
 from uuid import UUID
-from src.domain.repositories.message_repository import MessageRepository
+
 from src.application.dtos.message_dtos import MessageResponse
+from src.domain.repositories.message_repository import MessageRepository
 
 
 class GetMessages:
     def __init__(self, message_repository: MessageRepository):
         self.message_repository = message_repository
 
-    async def execute(
-        self, user_id: UUID, skip: int = 0, limit: int = 50
-    ) -> List[MessageResponse]:
+    async def execute(self, user_id: UUID, skip: int = 0, limit: int = 50) -> List[MessageResponse]:
         messages = await self.message_repository.get_messages_for_user(
             user_id, skip=skip, limit=limit
         )

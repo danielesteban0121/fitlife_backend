@@ -1,14 +1,15 @@
 from fastapi import APIRouter, Depends
+
 from src.adapters.api.dependencies import get_current_user
 from src.adapters.api.dependencies_phase_f import (
-    get_list_instructors,
     get_assign_instructor,
+    get_list_instructors,
     get_rate_instructor,
 )
 from src.application.dtos.instructor_dtos import (
-    ListInstructorsResponse,
     AssignInstructorRequest,
     AssignInstructorResponse,
+    ListInstructorsResponse,
     RateInstructorRequest,
     RateInstructorResponse,
 )

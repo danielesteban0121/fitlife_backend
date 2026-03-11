@@ -1,5 +1,5 @@
+from src.application.dtos.instructor_dtos import InstructorResponse, ListInstructorsResponse
 from src.domain.repositories.instructor_repository import InstructorRepository
-from src.application.dtos.instructor_dtos import ListInstructorsResponse, InstructorResponse
 
 
 class ListInstructors:

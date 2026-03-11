@@ -12,7 +12,6 @@ from src.adapters.api.schemas.auth_schemas import (
     TokenResponse,
 )
 from src.application.dtos.auth_dtos import RegisterUserRequest
-
 from src.config.limiter import limiter
 
 router = APIRouter(prefix="/api/auth", tags=["Auth"])

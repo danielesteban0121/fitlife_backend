@@ -1,5 +1,6 @@
 from datetime import datetime
-from uuid import uuid4, UUID
+from uuid import UUID, uuid4
+
 from src.domain.entities.audit_log import AuditLog
 from src.domain.repositories.user_repository import UserRepository
 
@@ -10,11 +11,7 @@ class AuditService:
 
     async def record_action(self, user_id: UUID, action: str, details: str | None = None) -> None:
         audit_log = AuditLog(
-            id=uuid4(),
-            user_id=user_id,
-            action=action,
-            details=details,
-            timestamp=datetime.utcnow()
+            id=uuid4(), user_id=user_id, action=action, details=details, timestamp=datetime.utcnow()
         )
         await self.user_repository.save_audit_log(audit_log)
 

@@ -1,6 +1,8 @@
 from uuid import UUID
+
 from src.domain.entities.audit_log import AuditLog
 from src.infrastructure.database.models.audit_log_model import AuditLogModel
+
 
 class AuditLogMapper:
     @staticmethod
@@ -10,7 +12,7 @@ class AuditLogMapper:
             user_id=UUID(model.user_id),
             action=model.action,
             details=model.details,
-            timestamp=model.timestamp
+            timestamp=model.timestamp,
         )
 
     @staticmethod
@@ -20,5 +22,5 @@ class AuditLogMapper:
             user_id=str(entity.user_id),
             action=entity.action,
             details=entity.details,
-            timestamp=entity.timestamp
+            timestamp=entity.timestamp,
         )

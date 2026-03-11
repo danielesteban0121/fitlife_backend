@@ -1,10 +1,10 @@
 from uuid import UUID
 
-from src.domain.entities.training import Routine, Exercise, RoutineExercise, WorkoutLog
+from src.domain.entities.training import Exercise, Routine, RoutineExercise, WorkoutLog
 from src.infrastructure.database.models.training_models import (
-    RoutineModel,
     ExerciseModel,
     RoutineExerciseModel,
+    RoutineModel,
     WorkoutLogModel,
 )
 

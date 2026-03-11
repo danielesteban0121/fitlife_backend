@@ -1,7 +1,7 @@
 from datetime import UTC, datetime
 from uuid import uuid4
 
-from sqlalchemy import Boolean, DateTime, Float, Integer, String, JSON, ForeignKey
+from sqlalchemy import JSON, Boolean, DateTime, Float, ForeignKey, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from ..base import Base

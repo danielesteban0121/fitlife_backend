@@ -1,7 +1,8 @@
 from uuid import UUID
+
 from src.application.dtos.user_dtos import UserProfileResponse
-from src.domain.repositories.user_repository import UserRepository
 from src.application.services.audit_service import AuditService
+from src.domain.repositories.user_repository import UserRepository
 
 
 class GetUserProfile:
@@ -15,9 +16,11 @@ class GetUserProfile:
             raise Exception("Usuario no encontrado")
 
         profile = await self.user_repository.get_profile(user_id)
-        
+
         # Record access in audit log
-        await self.audit_service.record_action(user_id, "VIEW_PROFILE", "User viewed their own profile")
+        await self.audit_service.record_action(
+            user_id, "VIEW_PROFILE", "User viewed their own profile"
+        )
 
         return UserProfileResponse(
             user_id=str(user.id),
@@ -26,5 +29,5 @@ class GetUserProfile:
             date_of_birth=profile.date_of_birth if profile else None,
             height_cm=profile.height_cm if profile else None,
             role=user.role.value if hasattr(user.role, "value") else str(user.role),
-            created_at=user.created_at
+            created_at=user.created_at,
         )

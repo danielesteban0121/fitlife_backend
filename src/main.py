@@ -1,14 +1,14 @@
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
+from slowapi import _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
 
 from src.adapters.api.middleware.error_handler import domain_exception_handler
 from src.adapters.api.routes.assessment_routes import router as assessment_router
 from src.adapters.api.routes.auth_routes import router as auth_router
-from src.domain.exceptions.base import DomainException
-from slowapi import _rate_limit_exceeded_handler
-from slowapi.errors import RateLimitExceeded
 from src.config.limiter import limiter
+from src.domain.exceptions.base import DomainException
 
 
 @asynccontextmanager
@@ -49,9 +49,9 @@ def create_app() -> FastAPI:
     app.include_router(assessment_router)
 
     from src.adapters.api.routes.instructor_routes import router as instructor_router
-    from src.adapters.api.routes.training_routes import router as training_router
-    from src.adapters.api.routes.nutrition_routes import router as nutrition_router
     from src.adapters.api.routes.message_routes import router as message_router
+    from src.adapters.api.routes.nutrition_routes import router as nutrition_router
+    from src.adapters.api.routes.training_routes import router as training_router
 
     app.include_router(instructor_router)
     app.include_router(training_router)

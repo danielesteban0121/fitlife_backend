@@ -1,7 +1,9 @@
-from pydantic import BaseModel
-from typing import List, Optional, Dict
 from datetime import date, datetime
+from typing import Dict, List, Optional
 from uuid import UUID
+
+from pydantic import BaseModel
+
 from src.domain.entities.nutrition import MealType
 
 

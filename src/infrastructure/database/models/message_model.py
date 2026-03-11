@@ -1,7 +1,7 @@
 from datetime import UTC, datetime
 from uuid import uuid4
 
-from sqlalchemy import DateTime, Enum, String, ForeignKey
+from sqlalchemy import DateTime, Enum, ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column
 
 from src.domain.entities.message import MessageType

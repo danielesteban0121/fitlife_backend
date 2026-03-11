@@ -1,17 +1,18 @@
 from fastapi import APIRouter, Depends
+
 from src.adapters.api.dependencies import get_current_user
 from src.adapters.api.dependencies_phase_f import (
-    get_create_routine,
     get_assign_routine,
     get_complete_workout,
+    get_create_routine,
 )
 from src.application.dtos.training_dtos import (
-    CreateRoutineRequest,
-    CreateRoutineResponse,
     AssignRoutineRequest,
     AssignRoutineResponse,
     CompleteWorkoutRequest,
     CompleteWorkoutResponse,
+    CreateRoutineRequest,
+    CreateRoutineResponse,
 )
 
 router = APIRouter(prefix="/api/training", tags=["Training"])

@@ -1,15 +1,15 @@
-from typing import Optional, List
+from typing import List, Optional
 from uuid import UUID
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
-from src.domain.entities.training import Routine, Exercise, WorkoutLog
+from src.domain.entities.training import Exercise, Routine, WorkoutLog
 from src.domain.repositories.training_repository import TrainingRepository
 from src.infrastructure.database.models.training_models import (
-    RoutineModel,
     ExerciseModel,
+    RoutineModel,
     WorkoutLogModel,
 )
 from src.infrastructure.mappers.training_mapper import TrainingMapper

@@ -1,12 +1,13 @@
-from src.domain.entities.instructor import InstructorAssignment
-from src.domain.repositories.instructor_repository import InstructorRepository
-from src.domain.repositories.user_repository import UserRepository
-from src.domain.exceptions.base import DomainException
+import uuid
+
 from src.application.dtos.instructor_dtos import (
     AssignInstructorRequest,
     AssignInstructorResponse,
 )
-import uuid
+from src.domain.entities.instructor import InstructorAssignment
+from src.domain.exceptions.base import DomainException
+from src.domain.repositories.instructor_repository import InstructorRepository
+from src.domain.repositories.user_repository import UserRepository
 
 
 class AssignInstructor:

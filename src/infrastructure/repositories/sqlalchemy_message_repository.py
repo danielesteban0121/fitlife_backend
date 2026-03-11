@@ -1,7 +1,7 @@
 from typing import List
 from uuid import UUID
 
-from sqlalchemy import select, func
+from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.domain.entities.message import Message

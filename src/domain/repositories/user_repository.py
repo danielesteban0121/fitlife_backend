@@ -2,9 +2,9 @@ from abc import ABC, abstractmethod
 from typing import Optional
 from uuid import UUID
 
+from ..entities.audit_log import AuditLog
 from ..entities.user import User
 from ..entities.user_profile import UserProfile
-from ..entities.audit_log import AuditLog
 from ..value_objects.email import Email
 
 

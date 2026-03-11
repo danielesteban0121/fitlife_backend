@@ -4,17 +4,17 @@ from uuid import UUID
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from src.domain.entities.audit_log import AuditLog
 from src.domain.entities.user import User
 from src.domain.entities.user_profile import UserProfile
-from src.domain.entities.audit_log import AuditLog
 from src.domain.repositories.user_repository import UserRepository
 from src.domain.value_objects.email import Email
+from src.infrastructure.database.models.audit_log_model import AuditLogModel
 from src.infrastructure.database.models.user_model import UserModel
 from src.infrastructure.database.models.user_profile_model import UserProfileModel
-from src.infrastructure.database.models.audit_log_model import AuditLogModel
+from src.infrastructure.mappers.audit_log_mapper import AuditLogMapper
 from src.infrastructure.mappers.user_mapper import UserMapper
 from src.infrastructure.mappers.user_profile_mapper import UserProfileMapper
-from src.infrastructure.mappers.audit_log_mapper import AuditLogMapper
 
 
 class SQLAlchemyUserRepository(UserRepository):
@@ -55,8 +55,10 @@ class SQLAlchemyUserRepository(UserRepository):
         model = UserProfileMapper.to_model(profile)
         # Use merge here to handle update or insert if needed, but since it's an update_profile
         # we assume it already exists or we want to ensure it's saved.
-        # Actually, for standard update in SQLAlchemy async, merging or fetching and updating is common.
-        # Since the plan says update_profile, let's assume existence check happens in Use Case or here.
+        # For standard update in SQLAlchemy async, merging or fetching
+        # and updating is common.
+        # Since the plan says update_profile, let's assume existence
+        # check happens in Use Case or here.
         await self.session.merge(model)
         await self.session.commit()
         return UserProfileMapper.to_domain(model)

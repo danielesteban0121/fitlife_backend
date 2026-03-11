@@ -1,5 +1,6 @@
 from src.infrastructure.security.jwt_token_manager import JWTTokenManager
 
+
 class JWTService:
     def __init__(self, token_manager: JWTTokenManager):
         self.token_manager = token_manager

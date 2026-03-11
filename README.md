@@ -172,3 +172,4 @@ SECRET_KEY=tu-clave-secreta-de-al-menos-32-caracteres
 ALGORITHM=HS256
 ACCESS_TOKEN_EXPIRE_MINUTES=60
 ```
+

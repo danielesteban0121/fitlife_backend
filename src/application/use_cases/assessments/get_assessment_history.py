@@ -8,7 +8,7 @@ class GetAssessmentHistory:
 
     async def execute(self, user_id: str) -> list[AssessmentResponse]:
         assessments = await self.repository.find_by_user_id(user_id)
-        
+
         return [
             AssessmentResponse(
                 id=a.id,
@@ -20,7 +20,7 @@ class GetAssessmentHistory:
                 weight_kg=a.weight_kg,
                 age=a.age,
                 fitness_score=a.fitness_score,
-                created_at=a.created_at
+                created_at=a.created_at,
             )
             for a in assessments
         ]

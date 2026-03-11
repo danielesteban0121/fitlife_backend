@@ -1,4 +1,4 @@
-from typing import Optional, List
+from typing import List, Optional
 from uuid import UUID
 
 from sqlalchemy import select
@@ -7,12 +7,12 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from src.domain.entities.instructor import Instructor, InstructorAssignment
 from src.domain.repositories.instructor_repository import InstructorRepository
 from src.infrastructure.database.models.instructor_model import (
-    InstructorModel,
     InstructorAssignmentModel,
+    InstructorModel,
 )
 from src.infrastructure.mappers.instructor_mapper import (
-    InstructorMapper,
     InstructorAssignmentMapper,
+    InstructorMapper,
 )
 
 

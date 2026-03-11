@@ -1,7 +1,7 @@
 from uuid import UUID
 
-from src.domain.entities.nutrition import NutritionPlan, DailyMeal
-from src.infrastructure.database.models.nutrition_models import NutritionPlanModel, DailyMealModel
+from src.domain.entities.nutrition import DailyMeal, NutritionPlan
+from src.infrastructure.database.models.nutrition_models import DailyMealModel, NutritionPlanModel
 
 
 class NutritionMapper:

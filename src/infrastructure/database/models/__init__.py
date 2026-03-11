@@ -1,9 +1,9 @@
 from .assessment_model import AssessmentModel
-from .user_model import UserModel
-from .instructor_model import InstructorModel, InstructorAssignmentModel
-from .training_models import ExerciseModel, RoutineModel, RoutineExerciseModel, WorkoutLogModel
-from .nutrition_models import NutritionPlanModel, DailyMealModel
+from .instructor_model import InstructorAssignmentModel, InstructorModel
 from .message_model import MessageModel
+from .nutrition_models import DailyMealModel, NutritionPlanModel
+from .training_models import ExerciseModel, RoutineExerciseModel, RoutineModel, WorkoutLogModel
+from .user_model import UserModel
 
 __all__ = [
     "UserModel",

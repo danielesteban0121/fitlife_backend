@@ -1,43 +1,44 @@
 from fastapi import Depends
 from sqlalchemy.ext.asyncio import AsyncSession
+
+from src.application.services.notification_service import NotificationService
+from src.application.use_cases.instructors.assign_instructor import AssignInstructor
+
+# Use Cases - Instructors
+from src.application.use_cases.instructors.list_instructors import ListInstructors
+from src.application.use_cases.instructors.rate_instructor import RateInstructor
+from src.application.use_cases.messages.get_messages import GetMessages
+
+# Use Cases - Messages
+from src.application.use_cases.messages.send_message import SendMessage
+
+# Use Cases - Nutrition
+from src.application.use_cases.nutrition.create_nutrition_plan import CreateNutritionPlan
+from src.application.use_cases.nutrition.get_active_nutrition_plan import GetActiveNutritionPlan
+from src.application.use_cases.training.assign_routine import AssignRoutine
+from src.application.use_cases.training.complete_workout import CompleteWorkout
+
+# Use Cases - Training
+from src.application.use_cases.training.create_routine import CreateRoutine
 from src.infrastructure.database.connection import get_db
+
+# Email & Notifications
+from src.infrastructure.email.smtp_email_service import SMTPEmailService
 
 # Repositories
 from src.infrastructure.repositories.sqlalchemy_instructor_repository import (
     SQLAlchemyInstructorRepository,
 )
-from src.infrastructure.repositories.sqlalchemy_training_repository import (
-    SQLAlchemyTrainingRepository,
+from src.infrastructure.repositories.sqlalchemy_message_repository import (
+    SQLAlchemyMessageRepository,
 )
 from src.infrastructure.repositories.sqlalchemy_nutrition_repository import (
     SQLAlchemyNutritionRepository,
 )
-from src.infrastructure.repositories.sqlalchemy_message_repository import (
-    SQLAlchemyMessageRepository,
+from src.infrastructure.repositories.sqlalchemy_training_repository import (
+    SQLAlchemyTrainingRepository,
 )
 from src.infrastructure.repositories.sqlalchemy_user_repository import SQLAlchemyUserRepository
-
-# Email & Notifications
-from src.infrastructure.email.smtp_email_service import SMTPEmailService
-from src.application.services.notification_service import NotificationService
-
-# Use Cases - Instructors
-from src.application.use_cases.instructors.list_instructors import ListInstructors
-from src.application.use_cases.instructors.assign_instructor import AssignInstructor
-from src.application.use_cases.instructors.rate_instructor import RateInstructor
-
-# Use Cases - Training
-from src.application.use_cases.training.create_routine import CreateRoutine
-from src.application.use_cases.training.assign_routine import AssignRoutine
-from src.application.use_cases.training.complete_workout import CompleteWorkout
-
-# Use Cases - Nutrition
-from src.application.use_cases.nutrition.create_nutrition_plan import CreateNutritionPlan
-from src.application.use_cases.nutrition.get_active_nutrition_plan import GetActiveNutritionPlan
-
-# Use Cases - Messages
-from src.application.use_cases.messages.send_message import SendMessage
-from src.application.use_cases.messages.get_messages import GetMessages
 
 
 def get_notification_service(db: AsyncSession = Depends(get_db)) -> NotificationService:

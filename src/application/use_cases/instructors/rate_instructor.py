@@ -1,6 +1,6 @@
-from src.domain.repositories.instructor_repository import InstructorRepository
-from src.domain.exceptions.base import DomainException
 from src.application.dtos.instructor_dtos import RateInstructorRequest, RateInstructorResponse
+from src.domain.exceptions.base import DomainException
+from src.domain.repositories.instructor_repository import InstructorRepository
 
 
 class RateInstructor:

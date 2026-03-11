@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
-from typing import Optional, List
+from typing import List, Optional
 from uuid import UUID
+
 from ..entities.instructor import Instructor, InstructorAssignment
 
 

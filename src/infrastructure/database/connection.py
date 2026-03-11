@@ -1,3 +1,5 @@
+import os
+import sys
 from typing import AsyncGenerator
 
 from sqlalchemy.ext.asyncio import (
@@ -7,9 +9,6 @@ from sqlalchemy.ext.asyncio import (
 )
 
 from src.infrastructure.database.base import Base
-
-import sys
-import os
 
 if "pytest" in sys.modules or os.environ.get("TESTING") == "1":
     DATABASE_URL = "sqlite+aiosqlite:///./test.db"

@@ -1,5 +1,6 @@
 from datetime import datetime
 from uuid import UUID, uuid4
+
 from src.application.dtos.training_dtos import CreateRoutineRequest, RoutineResponse
 from src.domain.entities.training import Routine
 from src.domain.repositories.training_repository import TrainingRepository
@@ -15,14 +16,14 @@ class CreateRoutine:
             name=request.name,
             description=request.description,
             instructor_id=instructor_id,
-            exercises=[]  # Exercises would be added here in a more detailed flow
+            exercises=[],  # Exercises would be added here in a more detailed flow
         )
         saved_routine = await self.repository.save_routine(routine)
-        
+
         return RoutineResponse(
             id=str(saved_routine.id),
             name=saved_routine.name,
             description=saved_routine.description,
             instructor_id=str(saved_routine.instructor_id),
-            created_at=datetime.utcnow()
+            created_at=datetime.utcnow(),
         )

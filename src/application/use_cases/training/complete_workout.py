@@ -1,9 +1,10 @@
 import uuid
+
+from src.application.dtos.training_dtos import CompleteWorkoutRequest, CompleteWorkoutResponse
 from src.domain.entities.training import WorkoutLog
+from src.domain.exceptions.base import DomainException
 from src.domain.repositories.training_repository import TrainingRepository
 from src.domain.repositories.user_repository import UserRepository
-from src.domain.exceptions.base import DomainException
-from src.application.dtos.training_dtos import CompleteWorkoutRequest, CompleteWorkoutResponse
 
 
 class CompleteWorkout:

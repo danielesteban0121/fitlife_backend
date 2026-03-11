@@ -1,11 +1,11 @@
 import uuid
-from typing import Dict, Optional
 from datetime import datetime
+from typing import Dict, Optional
 from uuid import UUID
 
+from src.application.ports.email_service import EmailService
 from src.domain.entities.message import Message, MessageType
 from src.domain.repositories.message_repository import MessageRepository
-from src.application.ports.email_service import EmailService
 
 
 class NotificationService:

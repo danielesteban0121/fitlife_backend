@@ -2,8 +2,8 @@ from uuid import UUID
 
 from src.domain.entities.instructor import Instructor, InstructorAssignment
 from src.infrastructure.database.models.instructor_model import (
-    InstructorModel,
     InstructorAssignmentModel,
+    InstructorModel,
 )
 
 
