@@ -2,6 +2,7 @@ import uuid
 from typing import Dict
 from datetime import datetime
 from uuid import UUID
+from typing import Dict, Optional
 
 from src.domain.entities.message import Message, MessageType
 from src.domain.repositories.message_repository import MessageRepository
@@ -9,7 +10,7 @@ from src.application.ports.email_service import EmailService
 
 
 class NotificationService:
-    def __init__(self, message_repository: MessageRepository, email_service: EmailService = None):
+    def __init__(self, message_repository: MessageRepository, email_service: Optional[EmailService] = None):
         self.message_repository = message_repository
         self.email_service = email_service
 

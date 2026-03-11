@@ -1,13 +1,14 @@
 from uuid import UUID
 from src.domain.repositories.nutrition_repository import NutritionRepository
 from src.application.dtos.nutrition_dtos import NutritionPlanResponseDTO, DailyMealDTO
+from typing import Optional
 
 
 class GetActiveNutritionPlan:
     def __init__(self, nutrition_repository: NutritionRepository):
         self.nutrition_repository = nutrition_repository
 
-    async def execute(self, user_id: UUID) -> NutritionPlanResponseDTO:
+    async def execute(self, user_id: UUID) -> Optional[NutritionPlanResponseDTO]:
         plan = await self.nutrition_repository.get_active_plan_by_user(user_id)
         if not plan:
             return None  # O lanzar DomainException("No active plan") dependiendo del diseño
