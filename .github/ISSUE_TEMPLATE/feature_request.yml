@@ -1,0 +1,31 @@
+name: 🚀 Nueva Funcionalidad (Feature)
+description: Propuesta para una nueva funcionalidad en FitLife.
+labels: ["feat"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Gracias por proponer esta nueva funcionalidad. Por favor, rellena los siguientes detalles.
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: "Descripción de la Funcionalidad"
+      description: "¿Qué nuevas capacidades tendrá el sistema?"
+      placeholder: "Me gustaria que el sistema pudiera..."
+    validations:
+      required: true
+  - type: textarea
+    id: motivation
+    attributes:
+      label: "¿Cuál es el valor para el usuario?"
+      description: "Explica por qué esto es importante para FitLife."
+    validations:
+      required: true
+  - type: checklist
+    id: checklist
+    attributes:
+      label: "Criterios de Aceptación Sugeridos"
+      options:
+        - label: "El usuario puede ver..."
+        - label: "Se requiere un nuevo endpoint..."
+        - label: "Se requiere actualización del modelo de base de datos..."

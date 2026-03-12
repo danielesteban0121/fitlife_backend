@@ -1,0 +1,38 @@
+name: 🐛 Reporte de Bug
+description: Algo no está funcionando como debería en el backend.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Reportar un bug nos ayuda a mejorar FitLife.
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: "Descripción del Error"
+      description: "Sé lo más específico posible."
+    validations:
+      required: true
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: "Pasos para Reproducir"
+      description: "¿Cómo podemos ver el error?"
+      placeholder: |
+        1. Iniciar el servidor
+        2. Llamar al endpoint /api/auth/login con...
+        3. Ver error 500
+    validations:
+      required: true
+  - type: input
+    id: expected-behavior
+    attributes:
+      label: "Comportamiento Esperado"
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: "Logs o Capturas de Pantalla"
+      description: "Pega aquí el traceback del error o cualquier log útil."
+      render: python
