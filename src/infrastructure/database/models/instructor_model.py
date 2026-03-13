@@ -10,9 +10,9 @@ from ..base import Base
 class InstructorModel(Base):
     __tablename__ = "instructors"
 
-    id: Mapped[str] = mapped_column(String, primary_key=True, default=lambda: str(uuid4()))
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid4()))
     user_id: Mapped[str] = mapped_column(
-        String, ForeignKey("users.id", ondelete="CASCADE"), unique=True, nullable=False
+        String(36), ForeignKey("users.id", ondelete="CASCADE"), unique=True, nullable=False
     )
     certifications: Mapped[list] = mapped_column(JSON, default=list)
     specializations: Mapped[list] = mapped_column(JSON, default=list)
@@ -25,12 +25,12 @@ class InstructorModel(Base):
 class InstructorAssignmentModel(Base):
     __tablename__ = "instructor_assignments"
 
-    id: Mapped[str] = mapped_column(String, primary_key=True, default=lambda: str(uuid4()))
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid4()))
     user_id: Mapped[str] = mapped_column(
-        String, ForeignKey("users.id", ondelete="CASCADE"), nullable=False
+        String(36), ForeignKey("users.id", ondelete="CASCADE"), nullable=False
     )
     instructor_id: Mapped[str] = mapped_column(
-        String, ForeignKey("instructors.id", ondelete="CASCADE"), nullable=False
+        String(36), ForeignKey("instructors.id", ondelete="CASCADE"), nullable=False
     )
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
     assigned_at: Mapped[datetime] = mapped_column(

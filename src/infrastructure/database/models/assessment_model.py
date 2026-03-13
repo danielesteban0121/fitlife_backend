@@ -15,13 +15,13 @@ class AssessmentModel(Base):
     __tablename__ = "assessments"
 
     id: Mapped[str] = mapped_column(
-        String,
+        String(36),
         primary_key=True,
         default=lambda: str(uuid4()),
     )
 
     user_id: Mapped[str] = mapped_column(
-        String,
+        String(36),
         ForeignKey("users.id", ondelete="CASCADE"),
         nullable=False,
         unique=True,  # Una evaluación inicial por usuario

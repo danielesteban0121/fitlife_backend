@@ -12,12 +12,12 @@ from ..base import Base
 class NutritionPlanModel(Base):
     __tablename__ = "nutrition_plans"
 
-    id: Mapped[str] = mapped_column(String, primary_key=True, default=lambda: str(uuid4()))
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid4()))
     user_id: Mapped[str] = mapped_column(
-        String, ForeignKey("users.id", ondelete="CASCADE"), nullable=False
+        String(36), ForeignKey("users.id", ondelete="CASCADE"), nullable=False
     )
     instructor_id: Mapped[str] = mapped_column(
-        String, ForeignKey("instructors.id", ondelete="CASCADE"), nullable=False
+        String(36), ForeignKey("instructors.id", ondelete="CASCADE"), nullable=False
     )
     target_calories: Mapped[int] = mapped_column(Integer, nullable=False)
     macro_distribution: Mapped[dict] = mapped_column(JSON, default=dict)
@@ -34,12 +34,12 @@ class NutritionPlanModel(Base):
 class DailyMealModel(Base):
     __tablename__ = "daily_meals"
 
-    id: Mapped[str] = mapped_column(String, primary_key=True, default=lambda: str(uuid4()))
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid4()))
     plan_id: Mapped[str] = mapped_column(
-        String, ForeignKey("nutrition_plans.id", ondelete="CASCADE"), nullable=False
+        String(36), ForeignKey("nutrition_plans.id", ondelete="CASCADE"), nullable=False
     )
     meal_type: Mapped[MealType] = mapped_column(Enum(MealType), nullable=False)
-    description: Mapped[str] = mapped_column(String, nullable=False)
+    description: Mapped[str] = mapped_column(String(500), nullable=False)
     calories: Mapped[int] = mapped_column(Integer, nullable=False)
     macros: Mapped[dict] = mapped_column(JSON, default=dict)
 

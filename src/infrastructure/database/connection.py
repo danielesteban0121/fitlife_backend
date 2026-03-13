@@ -8,16 +8,23 @@ from sqlalchemy.ext.asyncio import (
     create_async_engine,
 )
 
+from src.config.settings import settings
 from src.infrastructure.database.base import Base
 
+# Construcción de la URL para MySQL usando aiomysql
+DATABASE_URL = (
+    f"mysql+aiomysql://{settings.DB_USER}:{settings.DB_PASSWORD}@"
+    f"{settings.DB_HOST}:{settings.DB_PORT}/{settings.DB_NAME}"
+)
+
+# SQLite fallback solo para tests si no se define una URL de test específica
 if "pytest" in sys.modules or os.environ.get("TESTING") == "1":
     DATABASE_URL = "sqlite+aiosqlite:///./test.db"
-else:
-    DATABASE_URL = "sqlite+aiosqlite:///./fitlife.db"
 
 engine = create_async_engine(
     DATABASE_URL,
     echo=False,
+    pool_pre_ping=True,  # Recomendado para MySQL para evitar desconexiones
 )
 
 AsyncSessionLocal = async_sessionmaker(

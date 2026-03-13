@@ -13,20 +13,20 @@ class UserModel(Base):
     __tablename__ = "users"
 
     id: Mapped[str] = mapped_column(
-        String,
+        String(36),
         primary_key=True,
         default=lambda: str(uuid4()),
     )
 
     email: Mapped[str] = mapped_column(
-        String,
+        String(255),
         unique=True,
         index=True,
         nullable=False,
     )
 
     password_hash: Mapped[str] = mapped_column(
-        String,
+        String(255),
         nullable=False,
     )
 
