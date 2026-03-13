@@ -47,7 +47,7 @@ async def test_submit_assessment(client):
         headers=headers,
     )
 
-    assert response.status_code == 200, response.text
+    assert response.status_code == 201, response.text
     data = response.json()
 
     assert "fitness_score" in data

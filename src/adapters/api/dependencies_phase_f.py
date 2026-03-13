@@ -1,7 +1,11 @@
 from fastapi import Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from src.application.services.audit_service import AuditService
 from src.application.services.notification_service import NotificationService
+from src.application.use_cases.auth.change_password import ChangePassword
+from src.application.use_cases.auth.reset_password import ResetPassword
+from src.application.use_cases.auth.reset_password_request import ResetPasswordRequest
 from src.application.use_cases.instructors.assign_instructor import AssignInstructor
 
 # Use Cases - Instructors
@@ -98,3 +102,80 @@ def get_send_message(db: AsyncSession = Depends(get_db)) -> SendMessage:
 
 def get_get_messages(db: AsyncSession = Depends(get_db)) -> GetMessages:
     return GetMessages(SQLAlchemyMessageRepository(db))
+
+
+# ─── Physical Records ────────────────────────────────────────────────────────
+from src.application.use_cases.physical_records.create_physical_record import CreatePhysicalRecord  # noqa: E402
+from src.application.use_cases.physical_records.get_physical_history import GetPhysicalHistory  # noqa: E402
+from src.infrastructure.repositories.sqlalchemy_physical_record_repository import (  # noqa: E402
+    SQLAlchemyPhysicalRecordRepository,
+)
+
+
+def get_create_physical_record(db: AsyncSession = Depends(get_db)) -> CreatePhysicalRecord:
+    return CreatePhysicalRecord(SQLAlchemyPhysicalRecordRepository(db))
+
+
+def get_get_physical_history(db: AsyncSession = Depends(get_db)) -> GetPhysicalHistory:
+    return GetPhysicalHistory(SQLAlchemyPhysicalRecordRepository(db))
+
+
+# ─── Assessment Questions ───────────────────────────────────────────────────
+from src.application.use_cases.assessments.get_assessment_history import GetAssessmentHistory  # noqa: E402
+from src.application.use_cases.assessments.get_assessment_questions import GetAssessmentQuestions  # noqa: E402
+from src.infrastructure.repositories.sqlalchemy_assessment_repository import SQLAlchemyAssessmentRepository # noqa: E402
+
+def get_get_assessment_history(db: AsyncSession = Depends(get_db)) -> GetAssessmentHistory:
+    return GetAssessmentHistory(SQLAlchemyAssessmentRepository(db))
+
+def get_get_assessment_questions(db: AsyncSession = Depends(get_db)) -> GetAssessmentQuestions:
+    return GetAssessmentQuestions(SQLAlchemyAssessmentRepository(db))
+
+
+# ─── User Profile Use Cases ──────────────────────────────────────────────────
+
+from src.application.use_cases.users.get_user_profile import GetUserProfile  # noqa: E402
+from src.application.use_cases.users.update_user_profile import UpdateUserProfile  # noqa: E402
+from src.application.use_cases.users.get_profile_audit_log import GetProfileAuditLog  # noqa: E402
+
+
+def get_audit_service(db: AsyncSession = Depends(get_db)) -> AuditService:
+    return AuditService(SQLAlchemyUserRepository(db))
+
+
+def get_get_user_profile(
+    db: AsyncSession = Depends(get_db),
+    audit: AuditService = Depends(get_audit_service),
+) -> GetUserProfile:
+    return GetUserProfile(SQLAlchemyUserRepository(db), audit)
+
+
+def get_update_user_profile(
+    db: AsyncSession = Depends(get_db),
+    audit: AuditService = Depends(get_audit_service),
+) -> UpdateUserProfile:
+    return UpdateUserProfile(SQLAlchemyUserRepository(db), audit)
+
+
+def get_get_profile_audit_log(
+    audit: AuditService = Depends(get_audit_service),
+) -> GetProfileAuditLog:
+    return GetProfileAuditLog(audit)
+
+
+# ─── Auth: Password Flows ────────────────────────────────────────────────────
+from src.infrastructure.security.bcrypt_password_hasher import BCryptPasswordHasher  # noqa: E402
+
+
+def get_change_password(db: AsyncSession = Depends(get_db)) -> ChangePassword:
+    return ChangePassword(SQLAlchemyUserRepository(db), BCryptPasswordHasher())
+
+
+def get_reset_password_request(db: AsyncSession = Depends(get_db)) -> ResetPasswordRequest:
+    email_service = SMTPEmailService("smtp.example.com", 587, "user", "pass", "no-reply@fitlife.com")
+    return ResetPasswordRequest(SQLAlchemyUserRepository(db), email_service)
+
+
+def get_reset_password() -> ResetPassword:
+    return ResetPassword(BCryptPasswordHasher())
+

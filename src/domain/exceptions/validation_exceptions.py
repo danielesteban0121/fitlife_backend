@@ -11,3 +11,8 @@ class WeakPasswordException(DomainException):
 
 class InvalidBMIException(DomainException):
     pass
+
+
+class InvalidValueException(DomainException):
+    """Excepción para valores fuera de rango o inválidos en value objects."""
+    pass

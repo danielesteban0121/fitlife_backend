@@ -12,3 +12,22 @@ class RegisterUserResponse(BaseModel):
     access_token: str
     refresh_token: str
     expires_in: int
+
+
+class ChangePasswordRequest(BaseModel):
+    current_password: str = Field(min_length=8)
+    new_password: str = Field(min_length=8)
+
+
+class ResetPasswordRequestDTO(BaseModel):
+    email: EmailStr
+
+
+class ResetPasswordDTO(BaseModel):
+    token: str
+    new_password: str = Field(min_length=8)
+
+
+class MessageResponse(BaseModel):
+    message: str
+

@@ -1,7 +1,8 @@
 from abc import ABC, abstractmethod
-from typing import Optional
+from typing import List, Optional
 
 from src.domain.entities.assessment import Assessment
+from src.domain.entities.assessment_question import AssessmentQuestion, QuestionCategory
 
 
 class AssessmentRepository(ABC):
@@ -21,3 +22,14 @@ class AssessmentRepository(ABC):
     @abstractmethod
     async def delete_by_user_id(self, user_id: str) -> None:
         pass
+
+    @abstractmethod
+    async def find_questions(
+        self, category: Optional[QuestionCategory] = None
+    ) -> List[AssessmentQuestion]:
+        """Recupera las preguntas de evaluación configuradas."""
+
+    @abstractmethod
+    async def save_question(self, question: AssessmentQuestion) -> AssessmentQuestion:
+        """Guarda o actualiza una pregunta de evaluación."""
+

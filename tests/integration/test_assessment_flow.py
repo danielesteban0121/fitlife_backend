@@ -45,7 +45,7 @@ async def test_assessment_flow():
             headers=headers,
         )
 
-        assert assessment_response.status_code == 200
+        assert assessment_response.status_code == 201
         data = assessment_response.json()
 
         assert "id" in data
